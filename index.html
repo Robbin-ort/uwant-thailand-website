@@ -317,6 +317,235 @@
       opacity: 0.95;
     }
 
+    /* =========================
+   PRODUCTS MEGA MENU
+========================= */
+
+.products-menu {
+  position: static;
+}
+
+.products-trigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-arrow {
+  font-size: 14px;
+  transform: translateY(-1px);
+}
+
+.mega-menu {
+  position: absolute;
+
+  top: 76px;
+
+  left: 0;
+
+  width: 100%;
+
+  background: rgba(255,255,255,0.99);
+
+  border-top: 1px solid #eee;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.08);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform: translateY(-8px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
+
+  z-index: 950;
+}
+
+
+.products-menu:hover .mega-menu,
+.products-menu:focus-within .mega-menu {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  transform: translateY(0);
+}
+
+
+.mega-inner {
+
+  max-width: 1500px;
+
+  margin: auto;
+
+  padding:
+    35px 5%
+    40px;
+}
+
+
+.mega-title {
+
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 14px;
+
+  margin-bottom: 28px;
+}
+
+
+.mega-title span {
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+
+.mega-title small {
+
+  font-size: 11px;
+
+  color: #999;
+
+  letter-spacing: 2px;
+}
+
+
+.product-category-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, 1fr);
+
+  gap: 36px;
+
+  padding-bottom: 32px;
+}
+
+
+.mega-category h3 {
+
+  font-size: 16px;
+
+  margin-bottom: 5px;
+}
+
+
+.mega-category p {
+
+  color: #999;
+
+  font-size: 11px;
+
+  margin-bottom: 17px;
+}
+
+
+.mega-category a {
+
+  display: block;
+
+  padding: 6px 0;
+
+  font-size: 14px;
+
+  color: #444;
+
+  text-decoration: none;
+}
+
+
+.mega-category a:hover {
+
+  color: #000;
+
+  transform: translateX(3px);
+}
+
+
+.accessories-area {
+
+  border-top:
+    1px solid #e8e8e8;
+
+  padding-top: 28px;
+}
+
+
+.accessories-title {
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  margin-bottom: 24px;
+}
+
+
+.accessories-title span {
+
+  font-size: 10px;
+
+  font-weight: normal;
+
+  color: #999;
+
+  letter-spacing: 2px;
+
+  margin-left: 10px;
+}
+
+
+.accessories-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 40px;
+}
+
+
+.accessory-group h4 {
+
+  font-size: 14px;
+
+  margin-bottom: 13px;
+}
+
+
+.accessory-group a {
+
+  display: block;
+
+  color: #666;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  padding: 5px 0;
+
+  text-decoration: none;
+}
+
+
+.accessory-group a:hover {
+
+  color: #111;
+}
+    
     /* =====================
        MOBILE
     ===================== */
@@ -520,13 +749,197 @@
       <img src="./LOGO.png?v=4" alt="UWANT">
     </a>
 
-    <nav class="nav">
-      <a href="#products">ผลิตภัณฑ์</a>
-      <a href="#technology">เทคโนโลยี</a>
-      <a href="#support">บริการและการสนับสนุน</a>
-      <a href="#about">เกี่ยวกับ UWANT</a>
-      <a href="#buy" class="buy-button">ซื้อเลย</a>
-    </nav>
+<nav class="nav">
+
+  <div class="products-menu">
+
+    <a href="#products" class="products-trigger">
+      ผลิตภัณฑ์
+      <span class="nav-arrow">⌄</span>
+    </a>
+
+    <div class="mega-menu">
+
+      <div class="mega-inner">
+
+        <div class="mega-title">
+          <span>ผลิตภัณฑ์</span>
+          <small>PRODUCTS</small>
+        </div>
+
+
+        <div class="product-category-grid">
+
+          <div class="mega-category">
+            <h3>เครื่องดูดฝุ่น</h3>
+            <p>Vacuum Cleaners</p>
+
+            <a href="#products">V500</a>
+            <a href="#products">V500 MAX</a>
+          </div>
+
+
+          <div class="mega-category">
+            <h3>เครื่องดูดฝุ่นถูพื้น</h3>
+            <p>Floor Washers</p>
+
+            <a href="#products">D700</a>
+            <a href="#products">D700 Pro</a>
+          </div>
+
+
+          <div class="mega-category">
+            <h3>เครื่องดูดไรฝุ่น</h3>
+            <p>Mite Removers</p>
+
+            <a href="#products">M400</a>
+            <a href="#products">M600</a>
+          </div>
+
+
+          <div class="mega-category">
+            <h3>เครื่องทำความสะอาดเบาะและพรม</h3>
+            <p>Upholstery Cleaners</p>
+
+            <a href="#products">B100S</a>
+            <a href="#products">Y100S</a>
+          </div>
+
+
+          <div class="mega-category">
+            <h3>หุ่นยนต์ดูดฝุ่น</h3>
+            <p>Robot Vacuums</p>
+
+            <a href="#products">U300</a>
+          </div>
+
+        </div>
+
+
+        <div class="accessories-area">
+
+          <div class="accessories-title">
+            อุปกรณ์เสริม
+            <span>ACCESSORIES</span>
+          </div>
+
+
+          <div class="accessories-grid">
+
+
+            <div class="accessory-group">
+
+              <h4>
+                เครื่องดูดฝุ่น
+              </h4>
+
+              <a href="#products">
+                ชุดถุงเก็บฝุ่น 3 ชิ้น + HEPA 2 ชิ้น
+              </a>
+
+              <a href="#products">
+                ชุดแปรงขนสัตว์เลี้ยง
+              </a>
+
+            </div>
+
+
+            <div class="accessory-group">
+
+              <h4>
+                เครื่องดูดฝุ่นถูพื้น
+              </h4>
+
+              <a href="#products">
+                น้ำยาทำความสะอาด 500ML
+              </a>
+
+              <a href="#products">
+                HEPA
+              </a>
+
+              <a href="#products">
+                แท่งกำจัดกลิ่น D700 Pro
+              </a>
+
+            </div>
+
+
+            <div class="accessory-group">
+
+              <h4>
+                เครื่องดูดไรฝุ่น
+              </h4>
+
+              <a href="#products">
+                ไส้กรองฟองน้ำ 3 ชิ้น
+              </a>
+
+            </div>
+
+
+            <div class="accessory-group">
+
+              <h4>
+                U300
+              </h4>
+
+              <a href="#products">
+                ชุดกล่องเก็บฝุ่นและไส้กรอง
+              </a>
+
+              <a href="#products">
+                น้ำยาทำความสะอาดพื้น
+              </a>
+
+              <a href="#products">
+                ชุดลูกกลิ้งถูพื้น
+              </a>
+
+              <a href="#products">
+                แปรงลูกกลิ้งแบบยางและขน
+              </a>
+
+              <a href="#products">
+                ถุงเก็บฝุ่นป้องกันแบคทีเรีย
+              </a>
+
+              <a href="#products">
+                ชุดแปรงข้างซ้ายและขวา
+              </a>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <a href="#technology">
+    เทคโนโลยี
+  </a>
+
+  <a href="#support">
+    บริการและการสนับสนุน
+  </a>
+
+  <a href="#about">
+    เกี่ยวกับ UWANT
+  </a>
+
+  <a href="#buy"
+     class="buy-button">
+    ซื้อเลย
+  </a>
+
+</nav>
 
     <button
       class="menu-button"
