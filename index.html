@@ -2,517 +2,691 @@
 <html lang="th">
 
 <head>
-  <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
 
-  <title>UWANT Thailand | Smart Cleaning Technology</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-  <style>
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<title>UWANT Thailand | Smart Cleaning Technology</title>
 
 
-    html {
-      scroll-behavior: smooth;
-    }
+<style>
 
 
-    body {
-      font-family: Arial, "Noto Sans Thai", sans-serif;
-      color: #111;
-      background: #fff;
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 
-    /* =========================
-       顶部导航栏
-    ========================= */
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family: Arial, "Noto Sans Thai", sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+.header {
+
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background: rgba(255,255,255,0.97);
+
+    border-bottom: 1px solid #eee;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+}
+
+
+.logo img {
+
+    width: 125px;
+
+    display: block;
+}
+
+
+.nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 34px;
+}
+
+
+.nav a {
+
+    text-decoration: none;
+
+    color: #111;
+
+    font-size: 15px;
+}
+
+
+.nav a:hover {
+
+    opacity: 0.55;
+}
+
+
+.buy-button {
+
+    background: #111;
+
+    color: white !important;
+
+    padding: 12px 24px;
+
+    border-radius: 28px;
+}
+
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+
+.menu-button {
+
+    display: none;
+
+    width: 44px;
+
+    height: 44px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+
+.menu-button span {
+
+    display: block;
+
+    width: 25px;
+
+    height: 2px;
+
+    background: #111;
+
+    margin: 6px auto;
+}
+
+
+.mobile-menu {
+
+    display: none;
+
+    position: fixed;
+
+    top: 76px;
+
+    width: 100%;
+
+    background: white;
+
+    padding: 20px 6% 30px;
+
+    z-index: 999;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+
+.mobile-menu.open {
+
+    display: block;
+}
+
+
+.mobile-menu a {
+
+    display: block;
+
+    text-decoration: none;
+
+    color: #111;
+
+    padding: 16px 0;
+
+    font-size: 18px;
+
+    border-bottom: 1px solid #eee;
+}
+
+
+.mobile-menu .mobile-buy {
+
+    background: #111;
+
+    color: white;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    margin-top: 20px;
+
+    border: none;
+}
+
+
+
+/* =========================
+   HERO VIDEO
+========================= */
+
+
+.hero {
+
+    height: calc(100vh - 76px);
+
+    min-height: 620px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #111;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.hero-video {
+
+    position: absolute;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    top: 0;
+
+    left: 0;
+}
+
+
+/* 视频上加一层暗色，
+   让文字更容易阅读 */
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.28) 42%,
+        rgba(0,0,0,0.05) 75%
+    );
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 90%;
+
+    max-width: 1450px;
+
+    margin: auto;
+
+    color: white;
+
+    text-align: left;
+}
+
+
+.hero-small {
+
+    font-size: 15px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 18px;
+
+    opacity: 0.85;
+}
+
+
+.hero h1 {
+
+    font-size: clamp(58px, 7vw, 105px);
+
+    line-height: 0.96;
+
+    font-weight: 700;
+
+    margin-bottom: 25px;
+}
+
+
+.hero-model {
+
+    font-size: 25px;
+
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+
+.hero-description {
+
+    font-size: 20px;
+
+    line-height: 1.7;
+
+    margin-bottom: 32px;
+
+    max-width: 550px;
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 14px;
+}
+
+
+.hero-primary,
+.hero-secondary {
+
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+}
+
+
+.hero-primary {
+
+    background: white;
+
+    color: #111;
+}
+
+
+.hero-secondary {
+
+    border: 1px solid white;
+
+    color: white;
+
+    backdrop-filter: blur(6px);
+}
+
+
+
+/* =========================
+   INTRO
+========================= */
+
+
+.intro {
+
+    padding: 110px 8%;
+
+    text-align: center;
+}
+
+
+.intro-label {
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
+
+    color: #888;
+
+    margin-bottom: 20px;
+}
+
+
+.intro h2 {
+
+    font-size: 48px;
+
+    margin-bottom: 25px;
+}
+
+
+.intro p {
+
+    max-width: 780px;
+
+    margin: auto;
+
+    color: #666;
+
+    font-size: 19px;
+
+    line-height: 1.8;
+}
+
+
+
+/* =========================
+   FEATURE VIDEO SECTION
+========================= */
+
+
+.feature-section {
+
+    padding: 50px 6% 120px;
+
+    background: #f5f5f5;
+}
+
+
+.feature-heading {
+
+    max-width: 1200px;
+
+    margin: 0 auto 45px;
+
+    text-align: center;
+}
+
+
+.feature-heading span {
+
+    font-size: 14px;
+
+    color: #888;
+
+    letter-spacing: 3px;
+}
+
+
+.feature-heading h2 {
+
+    font-size: 48px;
+
+    margin-top: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+.feature-heading p {
+
+    color: #666;
+
+    font-size: 19px;
+
+    line-height: 1.7;
+}
+
+
+.feature-video-box {
+
+    max-width: 1350px;
+
+    margin: auto;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    background: #000;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.12);
+}
+
+
+.feature-video {
+
+    width: 100%;
+
+    display: block;
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media (max-width: 850px) {
+
 
     .header {
 
-      height: 76px;
+        height: 68px;
 
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      padding: 0 6%;
-
-      background: rgba(255,255,255,0.97);
-
-      border-bottom: 1px solid #eeeeee;
-
-      position: sticky;
-
-      top: 0;
-
-      z-index: 1000;
-    }
-
-
-    .logo {
-
-      display: flex;
-
-      align-items: center;
+        padding: 0 20px;
     }
 
 
     .logo img {
 
-      width: 125px;
-
-      height: auto;
-
-      display: block;
+        width: 105px;
     }
 
-
-    /* 电脑导航 */
 
     .nav {
 
-      display: flex;
-
-      align-items: center;
-
-      gap: 34px;
+        display: none;
     }
 
-
-    .nav a {
-
-      text-decoration: none;
-
-      color: #222;
-
-      font-size: 15px;
-
-      font-weight: 500;
-
-      transition: 0.2s;
-    }
-
-
-    .nav a:hover {
-
-      opacity: 0.55;
-    }
-
-
-    .buy-button {
-
-      background: #111;
-
-      color: white !important;
-
-      padding: 12px 24px;
-
-      border-radius: 28px;
-    }
-
-
-
-    /* =========================
-       手机菜单按钮
-    ========================= */
 
     .menu-button {
 
-      display: none;
-
-      width: 44px;
-
-      height: 44px;
-
-      border: none;
-
-      background: transparent;
-
-      cursor: pointer;
-
-      position: relative;
-
-      z-index: 1100;
+        display: block;
     }
 
-
-    .menu-button span {
-
-      display: block;
-
-      width: 25px;
-
-      height: 2px;
-
-      background: #111;
-
-      margin: 6px auto;
-
-      transition: 0.3s;
-    }
-
-
-
-    /* =========================
-       手机展开菜单
-    ========================= */
 
     .mobile-menu {
 
-      display: none;
-
-      position: fixed;
-
-      top: 76px;
-
-      left: 0;
-
-      width: 100%;
-
-      background: white;
-
-      border-top: 1px solid #eeeeee;
-
-      padding: 20px 6% 30px;
-
-      z-index: 999;
-
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        top: 68px;
     }
 
 
-    .mobile-menu.open {
-
-      display: block;
-    }
-
-
-    .mobile-menu a {
-
-      display: block;
-
-      text-decoration: none;
-
-      color: #111;
-
-      padding: 16px 0;
-
-      font-size: 18px;
-
-      border-bottom: 1px solid #eeeeee;
-    }
-
-
-    .mobile-menu .mobile-buy {
-
-      text-align: center;
-
-      background: #111;
-
-      color: white;
-
-      border-radius: 30px;
-
-      margin-top: 20px;
-
-      border: none;
-
-      padding: 15px;
-    }
-
-
-
-    /* =========================
-       首页第一屏
-    ========================= */
+    /* 手机端视频仍然铺满首屏 */
 
     .hero {
 
-      min-height: calc(100vh - 76px);
+        height: calc(100vh - 68px);
 
-      background: #f5f5f5;
+        min-height: 650px;
 
-      display: flex;
+        align-items: flex-end;
+    }
 
-      justify-content: center;
 
-      align-items: center;
+    .hero-video {
 
-      text-align: center;
+        object-fit: cover;
 
-      padding: 70px 20px;
+        object-position: center center;
+    }
+
+
+    /* 手机端暗色改为从下向上 */
+
+    .hero-overlay {
+
+        background:
+        linear-gradient(
+            0deg,
+            rgba(0,0,0,0.72) 0%,
+            rgba(0,0,0,0.38) 45%,
+            rgba(0,0,0,0.05) 75%
+        );
     }
 
 
     .hero-content {
 
-      max-width: 1000px;
+        width: 100%;
+
+        padding: 0 24px 65px;
+
+        text-align: center;
     }
 
 
     .hero-small {
 
-      font-size: 16px;
+        font-size: 13px;
 
-      letter-spacing: 3px;
-
-      color: #777;
-
-      margin-bottom: 25px;
+        margin-bottom: 14px;
     }
 
 
     .hero h1 {
 
-      font-size: clamp(52px, 7vw, 96px);
+        font-size: 54px;
 
-      line-height: 1.05;
+        line-height: 1;
+    }
 
-      font-weight: 700;
 
-      margin-bottom: 30px;
+    .hero-model {
+
+        font-size: 21px;
     }
 
 
     .hero-description {
 
-      font-size: 22px;
+        font-size: 18px;
 
-      line-height: 1.8;
+        margin: 0 auto 30px;
 
-      color: #555;
-
-      margin-bottom: 40px;
+        max-width: 380px;
     }
 
 
     .hero-buttons {
 
-      display: flex;
+        flex-direction: column;
 
-      justify-content: center;
-
-      align-items: center;
-
-      gap: 15px;
-
-      flex-wrap: wrap;
+        align-items: center;
     }
 
 
-    .primary-button,
-    .secondary-button {
+    .hero-primary,
+    .hero-secondary {
 
-      display: inline-block;
+        width: 100%;
 
-      padding: 15px 32px;
+        max-width: 340px;
 
-      border-radius: 30px;
+        text-align: center;
 
-      text-decoration: none;
-
-      font-size: 16px;
+        padding: 15px;
     }
 
-
-    .primary-button {
-
-      background: #111;
-
-      color: white;
-    }
-
-
-    .secondary-button {
-
-      color: #111;
-
-      border: 1px solid #111;
-    }
-
-
-
-    /* =========================
-       品牌介绍
-    ========================= */
 
     .intro {
 
-      padding: 110px 8%;
-
-      text-align: center;
+        padding: 75px 22px;
     }
 
 
     .intro h2 {
 
-      font-size: 42px;
-
-      margin-bottom: 22px;
+        font-size: 34px;
     }
 
 
     .intro p {
 
-      max-width: 760px;
-
-      margin: auto;
-
-      font-size: 19px;
-
-      line-height: 1.8;
-
-      color: #666;
+        font-size: 17px;
     }
 
 
+    .feature-section {
 
-    /* =========================
-       手机版本
-    ========================= */
-
-    @media (max-width: 850px) {
+        padding: 35px 18px 80px;
+    }
 
 
-      .header {
+    .feature-heading h2 {
 
-        height: 68px;
-
-        padding: 0 20px;
-      }
+        font-size: 34px;
+    }
 
 
-      .logo img {
-
-        width: 105px;
-      }
-
-
-      /* 电脑导航隐藏 */
-
-      .nav {
-
-        display: none;
-      }
-
-
-      /* 汉堡菜单显示 */
-
-      .menu-button {
-
-        display: block;
-      }
-
-
-      .mobile-menu {
-
-        top: 68px;
-      }
-
-
-      .hero {
-
-        min-height: calc(100vh - 68px);
-
-        padding: 70px 22px;
-      }
-
-
-      .hero-small {
-
-        font-size: 14px;
-
-        letter-spacing: 2px;
-
-        margin-bottom: 25px;
-      }
-
-
-      .hero h1 {
-
-        font-size: 54px;
-
-        line-height: 1.08;
-
-        margin-bottom: 30px;
-      }
-
-
-      .hero-description {
-
-        font-size: 20px;
-
-        line-height: 1.8;
-      }
-
-
-      .hero-buttons {
-
-        flex-direction: column;
-
-        width: 100%;
-      }
-
-
-      .primary-button,
-      .secondary-button {
-
-        width: 100%;
-
-        max-width: 310px;
-      }
-
-
-      .intro {
-
-        padding: 75px 22px;
-      }
-
-
-      .intro h2 {
-
-        font-size: 32px;
-      }
-
-
-      .intro p {
+    .feature-heading p {
 
         font-size: 17px;
-      }
-
     }
 
 
+    .feature-video-box {
 
-    /* 小手机进一步优化 */
+        border-radius: 14px;
+    }
 
-    @media (max-width: 480px) {
+}
 
 
-      .hero h1 {
+@media (max-width: 480px) {
+
+
+    .hero h1 {
 
         font-size: 46px;
-      }
-
-
-      .hero-description {
-
-        font-size: 18px;
-      }
-
     }
 
+}
 
-  </style>
+
+</style>
 
 </head>
 
@@ -521,260 +695,345 @@
 <body id="top">
 
 
-  <!-- =========================
-       顶部导航
-  ========================= -->
+<!-- HEADER -->
 
-  <header class="header">
+<header class="header">
 
 
-    <a class="logo" href="#top">
+<a class="logo" href="#top">
 
-      <img
-        src="./LOGO.png?v=2"
-        alt="UWANT">
+<img
+src="./LOGO.png?v=3"
+alt="UWANT">
 
-    </a>
+</a>
 
 
+<nav class="nav">
 
-    <!-- 电脑菜单 -->
+<a href="#products">
+ผลิตภัณฑ์
+</a>
 
-    <nav class="nav">
+<a href="#technology">
+เทคโนโลยี
+</a>
 
-      <a href="#products">
-        ผลิตภัณฑ์
-      </a>
+<a href="#support">
+บริการและการสนับสนุน
+</a>
 
-      <a href="#technology">
-        เทคโนโลยี
-      </a>
+<a href="#about">
+เกี่ยวกับ UWANT
+</a>
 
-      <a href="#support">
-        บริการและการสนับสนุน
-      </a>
+<a href="#buy"
+class="buy-button">
+ซื้อเลย
+</a>
 
-      <a href="#about">
-        เกี่ยวกับ UWANT
-      </a>
+</nav>
 
-      <a href="#buy"
-         class="buy-button">
-        ซื้อเลย
-      </a>
 
-    </nav>
 
+<button
+class="menu-button"
+id="menuButton"
+aria-label="Menu">
 
+<span></span>
+<span></span>
+<span></span>
 
-    <!-- 手机汉堡菜单 -->
+</button>
 
-    <button
-      class="menu-button"
-      id="menuButton"
-      aria-label="เปิดเมนู">
 
-      <span></span>
+</header>
 
-      <span></span>
 
-      <span></span>
 
-    </button>
+<!-- MOBILE MENU -->
 
+<nav
+class="mobile-menu"
+id="mobileMenu">
 
-  </header>
+<a href="#products">
+ผลิตภัณฑ์
+</a>
 
+<a href="#technology">
+เทคโนโลยี
+</a>
 
+<a href="#support">
+บริการและการสนับสนุน
+</a>
 
-  <!-- =========================
-       手机菜单
-  ========================= -->
+<a href="#about">
+เกี่ยวกับ UWANT
+</a>
 
-  <nav
-    class="mobile-menu"
-    id="mobileMenu">
+<a
+href="#buy"
+class="mobile-buy">
+ซื้อเลย
+</a>
 
+</nav>
 
-    <a href="#products">
-      ผลิตภัณฑ์
-    </a>
 
 
-    <a href="#technology">
-      เทคโนโลยี
-    </a>
+<!-- ======================
+     HERO VIDEO
+====================== -->
 
 
-    <a href="#support">
-      บริการและการสนับสนุน
-    </a>
+<section class="hero">
 
 
-    <a href="#about">
-      เกี่ยวกับ UWANT
-    </a>
+<video
 
+class="hero-video"
 
-    <a
-      href="#buy"
-      class="mobile-buy">
+autoplay
 
-      ซื้อเลย
+muted
 
-    </a>
+loop
 
+playsinline
 
-  </nav>
+preload="metadata">
 
+<source
+src="./v500-hero.mp4"
+type="video/mp4">
 
+</video>
 
-  <!-- =========================
-       首页第一屏
-  ========================= -->
 
-  <section class="hero">
 
+<div class="hero-overlay"></div>
 
-    <div class="hero-content">
 
 
-      <div class="hero-small">
+<div class="hero-content">
 
-        UWANT THAILAND
 
-      </div>
+<div class="hero-small">
 
+UWANT THAILAND
 
+</div>
 
-      <h1>
 
-        Smart Cleaning.<br>
+<h1>
 
-        Better Living.
+V500
 
-      </h1>
+</h1>
 
 
+<div class="hero-model">
 
-      <p class="hero-description">
+เครื่องดูดฝุ่นอเนกประสงค์
 
-        เทคโนโลยีการทำความสะอาดอัจฉริยะ
+</div>
 
-        <br>
 
-        เพื่อบ้านที่สะอาดง่ายขึ้นในทุกวัน
+<p class="hero-description">
 
-      </p>
+พลังทำความสะอาดที่ยืดหยุ่น
+สำหรับทุกพื้นที่ในบ้าน
 
+</p>
 
 
-      <div class="hero-buttons">
 
+<div class="hero-buttons">
 
-        <a
-          href="#products"
-          class="primary-button">
 
-          ดูผลิตภัณฑ์
+<a
+href="#products"
+class="hero-primary">
 
-        </a>
+ดูรายละเอียด
 
+</a>
 
-        <a
-          href="#about"
-          class="secondary-button">
 
-          เรียนรู้เพิ่มเติม
+<a
+href="#buy"
+class="hero-secondary">
 
-        </a>
+ซื้อเลย
 
+</a>
 
-      </div>
 
+</div>
 
-    </div>
 
+</div>
 
-  </section>
 
+</section>
 
 
-  <!-- =========================
-       品牌介绍
-  ========================= -->
 
-  <section
-    class="intro"
-    id="about">
+<!-- ======================
+     INTRO
+====================== -->
 
 
-    <h2>
+<section
+class="intro"
+id="about">
 
-      Cleaning Made Smarter
 
-    </h2>
+<div class="intro-label">
 
+SMART CLEANING TECHNOLOGY
 
-    <p>
+</div>
 
-      UWANT พัฒนาเทคโนโลยีการทำความสะอาดอัจฉริยะ
-      เพื่อช่วยให้การดูแลบ้านเป็นเรื่องง่าย สะดวก
-      และมีประสิทธิภาพมากยิ่งขึ้น
 
-    </p>
+<h2>
 
+Cleaning Made Smarter
 
-  </section>
+</h2>
 
 
+<p>
 
-  <!-- =========================
-       手机菜单功能
-  ========================= -->
+UWANT พัฒนาเทคโนโลยีการทำความสะอาดอัจฉริยะ
+เพื่อช่วยให้การดูแลบ้านเป็นเรื่องง่าย
+สะดวก และมีประสิทธิภาพมากยิ่งขึ้น
 
-  <script>
+</p>
 
 
-    const menuButton =
-      document.getElementById("menuButton");
+</section>
 
 
-    const mobileMenu =
-      document.getElementById("mobileMenu");
 
+<!-- ======================
+     FEATURE VIDEO
+====================== -->
 
 
-    menuButton.addEventListener(
-      "click",
-      function () {
+<section
+class="feature-section"
+id="technology">
 
-        mobileMenu.classList.toggle("open");
 
-      }
-    );
+<div class="feature-heading">
 
 
+<span>
 
-    const mobileLinks =
-      mobileMenu.querySelectorAll("a");
+UWANT V500
 
+</span>
 
-    mobileLinks.forEach(function(link) {
 
-      link.addEventListener(
-        "click",
-        function () {
+<h2>
 
-          mobileMenu.classList.remove("open");
+หนึ่งเครื่อง
+หลากหลายการทำความสะอาด
 
-        }
-      );
+</h2>
 
-    });
 
+<p>
 
-  </script>
+ออกแบบมาเพื่อรองรับการทำความสะอาด
+หลายรูปแบบในบ้านได้อย่างสะดวกยิ่งขึ้น
+
+</p>
+
+
+</div>
+
+
+
+<div class="feature-video-box">
+
+
+<video
+
+class="feature-video"
+
+muted
+
+loop
+
+playsinline
+
+controls
+
+preload="none">
+
+
+<source
+src="./v500-features.mp4.mp4"
+type="video/mp4">
+
+
+</video>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- MOBILE MENU SCRIPT -->
+
+<script>
+
+
+const menuButton =
+document.getElementById("menuButton");
+
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+
+menuButton.addEventListener(
+"click",
+function () {
+
+mobileMenu.classList.toggle("open");
+
+}
+);
+
+
+const mobileLinks =
+mobileMenu.querySelectorAll("a");
+
+
+mobileLinks.forEach(function(link) {
+
+link.addEventListener(
+"click",
+function () {
+
+mobileMenu.classList.remove("open");
+
+}
+);
+
+});
+
+
+</script>
 
 
 </body>
