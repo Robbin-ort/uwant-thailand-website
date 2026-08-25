@@ -710,6 +710,159 @@
 
   letter-spacing: 2px;
 }    
+
+/* =========================
+   OUR PRODUCTS
+========================= */
+
+.products-showcase {
+  background: #f5f5f5;
+  padding: 110px 5% 120px;
+}
+
+.products-container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.products-heading {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.products-eyebrow {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #999;
+  margin-bottom: 14px;
+}
+
+.products-heading h2 {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+.products-heading p {
+  color: #777;
+  font-size: 18px;
+}
+
+/* 分类按钮 */
+
+.product-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 45px;
+}
+
+.product-filter {
+  border: 1px solid #d8d8d8;
+  background: #fff;
+  color: #333;
+  padding: 11px 20px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.product-filter:hover {
+  border-color: #111;
+}
+
+.product-filter.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* 产品矩阵 */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+}
+
+.product-card.is-hidden {
+  display: none;
+}
+
+.product-image {
+  height: 360px;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 28px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.035);
+}
+
+.product-info {
+  padding: 27px 28px 30px;
+}
+
+.product-category {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.product-info h3 {
+  font-size: 29px;
+  margin-bottom: 9px;
+}
+
+.product-description {
+  min-height: 27px;
+  color: #666;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.product-link {
+  display: inline-block;
+  margin-top: 22px;
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 平板 */
+
+@media (max-width: 1100px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
     
     /* =====================
        MOBILE
@@ -893,6 +1046,56 @@
         color: #666;
         font-size: 17px;
       }
+.products-showcase {
+  padding: 75px 18px 85px;
+}
+
+.products-heading {
+  margin-bottom: 30px;
+}
+
+.products-heading h2 {
+  font-size: 36px;
+}
+
+.products-heading p {
+  font-size: 16px;
+}
+
+.product-filters {
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 30px;
+  scrollbar-width: none;
+}
+
+.product-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.product-filter {
+  flex: 0 0 auto;
+}
+
+.product-grid {
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.product-image {
+  height: 330px;
+}
+
+.product-info {
+  padding: 23px 22px 27px;
+}
+
+.product-info h3 {
+  font-size: 27px;
+}
+      
     }
 
     @media (max-width: 480px) {
@@ -1384,9 +1587,9 @@
 
   <!-- 第一段 V500 视频 -->
 
-  <section
-    class="hero"
-    id="products">
+<section
+  class="hero"
+  id="featured-v500">
 
     <div class="hero-media">
 
@@ -1519,6 +1722,426 @@
 
   </section>
 
+  <!-- =========================
+     OUR PRODUCTS
+========================= -->
+
+<section
+  class="products-showcase"
+  id="products">
+
+  <div class="products-container">
+
+    <div class="products-heading">
+
+      <div class="products-eyebrow">
+        UWANT PRODUCT COLLECTION
+      </div>
+
+      <h2>
+        ผลิตภัณฑ์ของเรา
+      </h2>
+
+      <p>
+        เทคโนโลยีการทำความสะอาดสำหรับทุกพื้นที่ในบ้าน
+      </p>
+
+    </div>
+
+
+    <!-- 产品分类 -->
+
+    <div class="product-filters">
+
+      <button
+        class="product-filter active"
+        data-filter="all">
+        ทั้งหมด
+      </button>
+
+      <button
+        class="product-filter"
+        data-filter="vacuum">
+        เครื่องดูดฝุ่น
+      </button>
+
+      <button
+        class="product-filter"
+        data-filter="floor-washer">
+        เครื่องดูดฝุ่นถูพื้น
+      </button>
+
+      <button
+        class="product-filter"
+        data-filter="mite">
+        เครื่องดูดไรฝุ่น
+      </button>
+
+      <button
+        class="product-filter"
+        data-filter="upholstery">
+        เครื่องทำความสะอาดเบาะและพรม
+      </button>
+
+      <button
+        class="product-filter"
+        data-filter="robot">
+        หุ่นยนต์ดูดฝุ่น
+      </button>
+
+    </div>
+
+
+    <div class="product-grid">
+
+
+      <!-- V500 -->
+
+      <article
+        class="product-card"
+        data-category="vacuum">
+
+        <div class="product-image">
+
+          <img
+            src="./v500.png"
+            alt="UWANT V500"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องดูดฝุ่น · Vacuum Cleaner
+          </div>
+
+          <h3>
+            V500
+          </h3>
+
+          <div class="product-description">
+            เครื่องดูดฝุ่นอเนกประสงค์สำหรับการทำความสะอาดในทุกวัน
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- V500 MAX -->
+
+      <article
+        class="product-card"
+        data-category="vacuum">
+
+        <div class="product-image">
+
+          <img
+            src="./v500-max.png"
+            alt="UWANT V500 MAX"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องดูดฝุ่น · Vacuum Cleaner
+          </div>
+
+          <h3>
+            V500 MAX
+          </h3>
+
+          <div class="product-description">
+            รุ่นอัปเกรดสำหรับการทำความสะอาดที่หลากหลายยิ่งขึ้น
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- D700 -->
+
+      <article
+        class="product-card"
+        data-category="floor-washer">
+
+        <div class="product-image">
+
+          <img
+            src="./d700.png"
+            alt="UWANT D700"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องดูดฝุ่นถูพื้น · Floor Washer
+          </div>
+
+          <h3>
+            D700
+          </h3>
+
+          <div class="product-description">
+            ดูดฝุ่นและถูพื้นในขั้นตอนเดียว
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- D700 PRO -->
+
+      <article
+        class="product-card"
+        data-category="floor-washer">
+
+        <div class="product-image">
+
+          <img
+            src="./d700-pro.png"
+            alt="UWANT D700 Pro"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องดูดฝุ่นถูพื้น · Floor Washer
+          </div>
+
+          <h3>
+            D700 Pro
+          </h3>
+
+          <div class="product-description">
+            รุ่น Pro สำหรับการทำความสะอาดพื้นอย่างมีประสิทธิภาพ
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- M400 -->
+
+      <article
+        class="product-card"
+        data-category="mite">
+
+        <div class="product-image">
+
+          <img
+            src="./m400.png"
+            alt="UWANT M400"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องดูดไรฝุ่น · Mite Remover
+          </div>
+
+          <h3>
+            M400
+          </h3>
+
+          <div class="product-description">
+            สำหรับดูแลที่นอน โซฟา และพื้นผิวผ้า
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- M600 -->
+
+      <article
+        class="product-card"
+        data-category="mite">
+
+        <div class="product-image">
+
+          <img
+            src="./m600.png"
+            alt="UWANT M600"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องดูดไรฝุ่น · Mite Remover
+          </div>
+
+          <h3>
+            M600
+          </h3>
+
+          <div class="product-description">
+            การดูแลพื้นผิวผ้าด้วยประสิทธิภาพที่เหนือกว่า
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- B100S -->
+
+      <article
+        class="product-card"
+        data-category="upholstery">
+
+        <div class="product-image">
+
+          <img
+            src="./b100s.png"
+            alt="UWANT B100S"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องทำความสะอาดเบาะและพรม
+          </div>
+
+          <h3>
+            B100S
+          </h3>
+
+          <div class="product-description">
+            สำหรับทำความสะอาดโซฟา พรม และพื้นผิวผ้าภายในบ้าน
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- Y100S -->
+
+      <article
+        class="product-card"
+        data-category="upholstery">
+
+        <div class="product-image">
+
+          <img
+            src="./y100s.png"
+            alt="UWANT Y100S"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            เครื่องทำความสะอาดเบาะและพรม
+          </div>
+
+          <h3>
+            Y100S
+          </h3>
+
+          <div class="product-description">
+            ทางเลือกสำหรับการทำความสะอาดคราบบนพื้นผิวผ้า
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+      <!-- U300 -->
+
+      <article
+        class="product-card"
+        data-category="robot">
+
+        <div class="product-image">
+
+          <img
+            src="./u300.png"
+            alt="UWANT U300"
+            loading="lazy">
+
+        </div>
+
+        <div class="product-info">
+
+          <div class="product-category">
+            หุ่นยนต์ดูดฝุ่น · Robot Vacuum
+          </div>
+
+          <h3>
+            U300
+          </h3>
+
+          <div class="product-description">
+            ระบบทำความสะอาดอัตโนมัติสำหรับบ้านยุคใหม่
+          </div>
+
+          <span class="product-link">
+            ดูรายละเอียด →
+          </span>
+
+        </div>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
 
   <script>
 
@@ -1620,6 +2243,68 @@ mobileProductsButton.addEventListener(
 
     observer.observe(featureVideo);
 
+  /* =========================
+   产品分类筛选
+========================= */
+
+const productFilterButtons =
+  document.querySelectorAll(".product-filter");
+
+const productCards =
+  document.querySelectorAll(".product-card");
+
+
+productFilterButtons.forEach(
+  function(button) {
+
+    button.addEventListener(
+      "click",
+      function() {
+
+        const filter =
+          button.dataset.filter;
+
+
+        productFilterButtons.forEach(
+          function(item) {
+
+            item.classList.remove("active");
+
+          }
+        );
+
+
+        button.classList.add("active");
+
+
+        productCards.forEach(
+          function(card) {
+
+            const category =
+              card.dataset.category;
+
+
+            if (
+              filter === "all" ||
+              category === filter
+            ) {
+
+              card.classList.remove("is-hidden");
+
+            } else {
+
+              card.classList.add("is-hidden");
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  }
+);  
 
   </script>
 
