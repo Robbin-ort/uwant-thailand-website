@@ -94,6 +94,8 @@
       top: 76px;
       left: 0;
       width: 100%;
+      max-height: calc(100vh - 76px);
+      overflow-y: auto;
       background: white;
       padding: 20px 6% 30px;
       z-index: 999;
@@ -303,12 +305,19 @@
       margin-bottom: 15px;
     }
 
-    .feature-content h2 {
-      max-width: 760px;
-      font-size: clamp(42px, 5vw, 76px);
-      line-height: 1.08;
-      margin-bottom: 18px;
-    }
+  .feature-content h2 {
+
+  max-width: 1200px;
+
+  font-size:
+    clamp(36px, 3.5vw, 58px);
+
+  line-height: 1.15;
+
+  margin-bottom: 18px;
+
+  white-space: nowrap;
+}
 
     .feature-content p {
       max-width: 650px;
@@ -545,6 +554,162 @@
 
   color: #111;
 }
+
+/* =========================
+   MOBILE PRODUCTS MENU
+========================= */
+
+.mobile-products {
+  border-bottom: 1px solid #eee;
+}
+
+
+.mobile-section-button {
+
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  background: transparent;
+
+  border: none;
+
+  padding: 18px 0;
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 18px;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+
+.mobile-plus {
+
+  font-size: 26px;
+
+  font-weight: 300;
+
+  line-height: 1;
+
+  transition: transform 0.25s ease;
+}
+
+
+.mobile-products.open
+.mobile-plus {
+
+  transform: rotate(45deg);
+}
+
+
+.mobile-products-content {
+
+  display: none;
+
+  padding-bottom: 25px;
+}
+
+
+.mobile-products.open
+.mobile-products-content {
+
+  display: block;
+}
+
+
+.mobile-category {
+
+  padding:
+
+    18px 0
+    18px 18px;
+
+  border-top:
+    1px solid #f0f0f0;
+}
+
+
+.mobile-category-title {
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+
+.mobile-category-title small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: #999;
+
+  font-size: 10px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.5px;
+}
+
+
+.mobile-category a {
+
+  display: block;
+
+  border: none !important;
+
+  padding: 8px 0 !important;
+
+  font-size: 15px !important;
+
+  color: #555 !important;
+}
+
+
+.mobile-accessories-title {
+
+  margin-top: 12px;
+
+  padding:
+
+    23px 0
+    10px;
+
+  border-top:
+    2px solid #111;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+.mobile-accessories-title small {
+
+  display: block;
+
+  margin-top: 4px;
+
+  color: #999;
+
+  font-size: 10px;
+
+  font-weight: normal;
+
+  letter-spacing: 2px;
+}    
     
     /* =====================
        MOBILE
@@ -719,6 +884,7 @@
         max-width: 600px;
         margin: 0 auto 16px;
         font-size: 34px;
+        white-space: normal;
       }
 
       .feature-content p {
@@ -955,17 +1121,265 @@
   </header>
 
 
-  <nav
-    class="mobile-menu"
-    id="mobileMenu">
+<nav
+  class="mobile-menu"
+  id="mobileMenu">
 
-    <a href="#products">ผลิตภัณฑ์</a>
-    <a href="#technology">เทคโนโลยี</a>
-    <a href="#support">บริการและการสนับสนุน</a>
-    <a href="#about">เกี่ยวกับ UWANT</a>
-    <a href="#buy" class="mobile-buy">ซื้อเลย</a>
 
-  </nav>
+  <!-- 产品 -->
+
+  <div class="mobile-products">
+
+    <button
+      class="mobile-section-button"
+      id="mobileProductsButton">
+
+      <span>
+        ผลิตภัณฑ์
+      </span>
+
+      <span
+        class="mobile-plus"
+        id="mobileProductsPlus">
+        +
+      </span>
+
+    </button>
+
+
+    <div
+      class="mobile-products-content"
+      id="mobileProductsContent">
+
+
+      <!-- 吸尘器 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องดูดฝุ่น
+          <small>Vacuum Cleaners</small>
+        </div>
+
+        <a href="#products">
+          V500
+        </a>
+
+        <a href="#products">
+          V500 MAX
+        </a>
+
+      </div>
+
+
+      <!-- 洗地机 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องดูดฝุ่นถูพื้น
+          <small>Floor Washers</small>
+        </div>
+
+        <a href="#products">
+          D700
+        </a>
+
+        <a href="#products">
+          D700 Pro
+        </a>
+
+      </div>
+
+
+      <!-- 除螨仪 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องดูดไรฝุ่น
+          <small>Mite Removers</small>
+        </div>
+
+        <a href="#products">
+          M400
+        </a>
+
+        <a href="#products">
+          M600
+        </a>
+
+      </div>
+
+
+      <!-- 布艺清洗机 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องทำความสะอาดเบาะและพรม
+          <small>Upholstery Cleaners</small>
+        </div>
+
+        <a href="#products">
+          B100S
+        </a>
+
+        <a href="#products">
+          Y100S
+        </a>
+
+      </div>
+
+
+      <!-- 扫地机器人 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          หุ่นยนต์ดูดฝุ่น
+          <small>Robot Vacuums</small>
+        </div>
+
+        <a href="#products">
+          U300
+        </a>
+
+      </div>
+
+
+      <!-- 配件 -->
+
+      <div class="mobile-accessories-title">
+
+        อุปกรณ์เสริม
+
+        <small>
+          ACCESSORIES
+        </small>
+
+      </div>
+
+
+      <!-- 吸尘器配件 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องดูดฝุ่น
+        </div>
+
+        <a href="#products">
+          ชุดถุงเก็บฝุ่น 3 ชิ้น + HEPA 2 ชิ้น
+        </a>
+
+        <a href="#products">
+          ชุดแปรงขนสัตว์เลี้ยง
+        </a>
+
+      </div>
+
+
+      <!-- 洗地机配件 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องดูดฝุ่นถูพื้น
+        </div>
+
+        <a href="#products">
+          น้ำยาทำความสะอาด 500ML
+        </a>
+
+        <a href="#products">
+          HEPA
+        </a>
+
+        <a href="#products">
+          แท่งกำจัดกลิ่น D700 Pro
+        </a>
+
+      </div>
+
+
+      <!-- 除螨仪配件 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          เครื่องดูดไรฝุ่น
+        </div>
+
+        <a href="#products">
+          ไส้กรองฟองน้ำ 3 ชิ้น
+        </a>
+
+      </div>
+
+
+      <!-- U300配件 -->
+
+      <div class="mobile-category">
+
+        <div class="mobile-category-title">
+          U300
+        </div>
+
+        <a href="#products">
+          ชุดกล่องเก็บฝุ่นและไส้กรอง
+        </a>
+
+        <a href="#products">
+          น้ำยาทำความสะอาดพื้น
+        </a>
+
+        <a href="#products">
+          ชุดลูกกลิ้งถูพื้น
+        </a>
+
+        <a href="#products">
+          แปรงลูกกลิ้งแบบยางและขน
+        </a>
+
+        <a href="#products">
+          ถุงเก็บฝุ่นป้องกันแบคทีเรีย
+        </a>
+
+        <a href="#products">
+          ชุดแปรงข้างซ้ายและขวา
+        </a>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- 其他导航 -->
+
+  <a href="#technology">
+    เทคโนโลยี
+  </a>
+
+  <a href="#support">
+    บริการและการสนับสนุน
+  </a>
+
+  <a href="#about">
+    เกี่ยวกับ UWANT
+  </a>
+
+  <a
+    href="#buy"
+    class="mobile-buy">
+    ซื้อเลย
+  </a>
+
+
+</nav>
 
 
   <!-- 第一段 V500 视频 -->
@@ -1142,6 +1556,24 @@
 
       });
 
+    /* 手机产品分类展开 */
+
+const mobileProducts =
+  document.querySelector(".mobile-products");
+
+
+const mobileProductsButton =
+  document.getElementById("mobileProductsButton");
+
+
+mobileProductsButton.addEventListener(
+  "click",
+  function () {
+
+    mobileProducts.classList.toggle("open");
+
+  }
+);
 
     /* 第二段视频：
        滑到页面后自动播放
