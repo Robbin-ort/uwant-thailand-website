@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
   <title>UWANT Thailand | Smart Cleaning Technology</title>
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
 
     body {
       font-family: Arial, "Noto Sans Thai", sans-serif;
@@ -19,237 +29,754 @@
       background: #fff;
     }
 
-    /* 顶部导航 */
+
+    /* =========================
+       顶部导航栏
+    ========================= */
+
     .header {
+
       height: 76px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      padding: 0 7%;
-      background: rgba(255,255,255,0.96);
+
+      padding: 0 6%;
+
+      background: rgba(255,255,255,0.97);
+
       border-bottom: 1px solid #eeeeee;
+
       position: sticky;
+
       top: 0;
+
       z-index: 1000;
     }
 
+
+    .logo {
+
+      display: flex;
+
+      align-items: center;
+    }
+
+
     .logo img {
+
       width: 125px;
+
+      height: auto;
+
       display: block;
     }
 
+
+    /* 电脑导航 */
+
     .nav {
+
       display: flex;
+
       align-items: center;
+
       gap: 34px;
     }
 
+
     .nav a {
+
       text-decoration: none;
+
       color: #222;
+
       font-size: 15px;
+
       font-weight: 500;
+
       transition: 0.2s;
     }
 
+
     .nav a:hover {
-      color: #777;
+
+      opacity: 0.55;
     }
+
 
     .buy-button {
+
       background: #111;
-      color: #fff !important;
-      padding: 11px 22px;
-      border-radius: 24px;
+
+      color: white !important;
+
+      padding: 12px 24px;
+
+      border-radius: 28px;
     }
 
-    /* 首页第一屏 */
-    .hero {
-      min-height: calc(100vh - 76px);
-      background: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 20px;
+
+
+    /* =========================
+       手机菜单按钮
+    ========================= */
+
+    .menu-button {
+
+      display: none;
+
+      width: 44px;
+
+      height: 44px;
+
+      border: none;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      position: relative;
+
+      z-index: 1100;
     }
+
+
+    .menu-button span {
+
+      display: block;
+
+      width: 25px;
+
+      height: 2px;
+
+      background: #111;
+
+      margin: 6px auto;
+
+      transition: 0.3s;
+    }
+
+
+
+    /* =========================
+       手机展开菜单
+    ========================= */
+
+    .mobile-menu {
+
+      display: none;
+
+      position: fixed;
+
+      top: 76px;
+
+      left: 0;
+
+      width: 100%;
+
+      background: white;
+
+      border-top: 1px solid #eeeeee;
+
+      padding: 20px 6% 30px;
+
+      z-index: 999;
+
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+
+    .mobile-menu.open {
+
+      display: block;
+    }
+
+
+    .mobile-menu a {
+
+      display: block;
+
+      text-decoration: none;
+
+      color: #111;
+
+      padding: 16px 0;
+
+      font-size: 18px;
+
+      border-bottom: 1px solid #eeeeee;
+    }
+
+
+    .mobile-menu .mobile-buy {
+
+      text-align: center;
+
+      background: #111;
+
+      color: white;
+
+      border-radius: 30px;
+
+      margin-top: 20px;
+
+      border: none;
+
+      padding: 15px;
+    }
+
+
+
+    /* =========================
+       首页第一屏
+    ========================= */
+
+    .hero {
+
+      min-height: calc(100vh - 76px);
+
+      background: #f5f5f5;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      text-align: center;
+
+      padding: 70px 20px;
+    }
+
 
     .hero-content {
-      max-width: 900px;
+
+      max-width: 1000px;
     }
+
 
     .hero-small {
+
       font-size: 16px;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
+
+      letter-spacing: 3px;
+
       color: #777;
+
+      margin-bottom: 25px;
     }
+
 
     .hero h1 {
-      font-size: clamp(48px, 7vw, 92px);
+
+      font-size: clamp(52px, 7vw, 96px);
+
       line-height: 1.05;
+
       font-weight: 700;
-      margin-bottom: 26px;
+
+      margin-bottom: 30px;
     }
+
 
     .hero-description {
+
       font-size: 22px;
-      line-height: 1.7;
+
+      line-height: 1.8;
+
       color: #555;
-      margin-bottom: 38px;
+
+      margin-bottom: 40px;
     }
 
+
     .hero-buttons {
+
       display: flex;
+
       justify-content: center;
-      gap: 14px;
+
+      align-items: center;
+
+      gap: 15px;
+
       flex-wrap: wrap;
     }
 
+
     .primary-button,
     .secondary-button {
+
       display: inline-block;
-      padding: 15px 30px;
+
+      padding: 15px 32px;
+
       border-radius: 30px;
+
       text-decoration: none;
+
       font-size: 16px;
     }
 
+
     .primary-button {
+
       background: #111;
+
       color: white;
     }
 
+
     .secondary-button {
-      border: 1px solid #111;
+
       color: #111;
-      background: transparent;
+
+      border: 1px solid #111;
     }
 
-    /* 第二区域 */
+
+
+    /* =========================
+       品牌介绍
+    ========================= */
+
     .intro {
+
       padding: 110px 8%;
+
       text-align: center;
-      background: white;
     }
+
 
     .intro h2 {
+
       font-size: 42px;
+
       margin-bottom: 22px;
     }
 
+
     .intro p {
+
       max-width: 760px;
+
       margin: auto;
-      color: #666;
+
       font-size: 19px;
+
       line-height: 1.8;
+
+      color: #666;
     }
 
-    /* 手机适配 */
+
+
+    /* =========================
+       手机版本
+    ========================= */
+
     @media (max-width: 850px) {
+
+
       .header {
-        padding: 0 5%;
+
+        height: 68px;
+
+        padding: 0 20px;
       }
 
-      .nav a:not(.buy-button) {
-        display: none;
-      }
 
       .logo img {
+
         width: 105px;
       }
 
-      .hero h1 {
-        font-size: 48px;
+
+      /* 电脑导航隐藏 */
+
+      .nav {
+
+        display: none;
       }
 
+
+      /* 汉堡菜单显示 */
+
+      .menu-button {
+
+        display: block;
+      }
+
+
+      .mobile-menu {
+
+        top: 68px;
+      }
+
+
+      .hero {
+
+        min-height: calc(100vh - 68px);
+
+        padding: 70px 22px;
+      }
+
+
+      .hero-small {
+
+        font-size: 14px;
+
+        letter-spacing: 2px;
+
+        margin-bottom: 25px;
+      }
+
+
+      .hero h1 {
+
+        font-size: 54px;
+
+        line-height: 1.08;
+
+        margin-bottom: 30px;
+      }
+
+
       .hero-description {
+
+        font-size: 20px;
+
+        line-height: 1.8;
+      }
+
+
+      .hero-buttons {
+
+        flex-direction: column;
+
+        width: 100%;
+      }
+
+
+      .primary-button,
+      .secondary-button {
+
+        width: 100%;
+
+        max-width: 310px;
+      }
+
+
+      .intro {
+
+        padding: 75px 22px;
+      }
+
+
+      .intro h2 {
+
+        font-size: 32px;
+      }
+
+
+      .intro p {
+
+        font-size: 17px;
+      }
+
+    }
+
+
+
+    /* 小手机进一步优化 */
+
+    @media (max-width: 480px) {
+
+
+      .hero h1 {
+
+        font-size: 46px;
+      }
+
+
+      .hero-description {
+
         font-size: 18px;
       }
 
-      .intro {
-        padding: 70px 20px;
-      }
-
-      .intro h2 {
-        font-size: 32px;
-      }
     }
+
+
   </style>
+
 </head>
 
 
-<body>
 
-  <!-- 顶部菜单 -->
+<body id="top">
+
+
+  <!-- =========================
+       顶部导航
+  ========================= -->
+
   <header class="header">
 
-    <a class="logo" href="#">
-      <img src="LOGO.png" alt="UWANT">
+
+    <a class="logo" href="#top">
+
+      <img
+        src="./LOGO.png?v=2"
+        alt="UWANT">
+
     </a>
 
+
+
+    <!-- 电脑菜单 -->
+
     <nav class="nav">
-      <a href="#">ผลิตภัณฑ์</a>
-      <a href="#">เทคโนโลยี</a>
-      <a href="#">บริการและการสนับสนุน</a>
-      <a href="#">เกี่ยวกับ UWANT</a>
-      <a href="#" class="buy-button">ซื้อเลย</a>
+
+      <a href="#products">
+        ผลิตภัณฑ์
+      </a>
+
+      <a href="#technology">
+        เทคโนโลยี
+      </a>
+
+      <a href="#support">
+        บริการและการสนับสนุน
+      </a>
+
+      <a href="#about">
+        เกี่ยวกับ UWANT
+      </a>
+
+      <a href="#buy"
+         class="buy-button">
+        ซื้อเลย
+      </a>
+
     </nav>
+
+
+
+    <!-- 手机汉堡菜单 -->
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      aria-label="เปิดเมนู">
+
+      <span></span>
+
+      <span></span>
+
+      <span></span>
+
+    </button>
+
 
   </header>
 
 
-  <!-- 首页第一屏 -->
+
+  <!-- =========================
+       手机菜单
+  ========================= -->
+
+  <nav
+    class="mobile-menu"
+    id="mobileMenu">
+
+
+    <a href="#products">
+      ผลิตภัณฑ์
+    </a>
+
+
+    <a href="#technology">
+      เทคโนโลยี
+    </a>
+
+
+    <a href="#support">
+      บริการและการสนับสนุน
+    </a>
+
+
+    <a href="#about">
+      เกี่ยวกับ UWANT
+    </a>
+
+
+    <a
+      href="#buy"
+      class="mobile-buy">
+
+      ซื้อเลย
+
+    </a>
+
+
+  </nav>
+
+
+
+  <!-- =========================
+       首页第一屏
+  ========================= -->
+
   <section class="hero">
+
 
     <div class="hero-content">
 
+
       <div class="hero-small">
+
         UWANT THAILAND
+
       </div>
 
+
+
       <h1>
+
         Smart Cleaning.<br>
+
         Better Living.
+
       </h1>
 
+
+
       <p class="hero-description">
-        เทคโนโลยีการทำความสะอาดอัจฉริยะ<br>
+
+        เทคโนโลยีการทำความสะอาดอัจฉริยะ
+
+        <br>
+
         เพื่อบ้านที่สะอาดง่ายขึ้นในทุกวัน
+
       </p>
+
+
 
       <div class="hero-buttons">
 
-        <a href="#" class="primary-button">
+
+        <a
+          href="#products"
+          class="primary-button">
+
           ดูผลิตภัณฑ์
+
         </a>
 
-        <a href="#" class="secondary-button">
+
+        <a
+          href="#about"
+          class="secondary-button">
+
           เรียนรู้เพิ่มเติม
+
         </a>
+
 
       </div>
 
+
     </div>
+
 
   </section>
 
 
-  <!-- 品牌介绍 -->
-  <section class="intro">
+
+  <!-- =========================
+       品牌介绍
+  ========================= -->
+
+  <section
+    class="intro"
+    id="about">
+
 
     <h2>
+
       Cleaning Made Smarter
+
     </h2>
 
+
     <p>
+
       UWANT พัฒนาเทคโนโลยีการทำความสะอาดอัจฉริยะ
       เพื่อช่วยให้การดูแลบ้านเป็นเรื่องง่าย สะดวก
       และมีประสิทธิภาพมากยิ่งขึ้น
+
     </p>
+
 
   </section>
 
+
+
+  <!-- =========================
+       手机菜单功能
+  ========================= -->
+
+  <script>
+
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        mobileMenu.classList.toggle("open");
+
+      }
+    );
+
+
+
+    const mobileLinks =
+      mobileMenu.querySelectorAll("a");
+
+
+    mobileLinks.forEach(function(link) {
+
+      link.addEventListener(
+        "click",
+        function () {
+
+          mobileMenu.classList.remove("open");
+
+        }
+      );
+
+    });
+
+
+  </script>
+
+
 </body>
+
 </html>
