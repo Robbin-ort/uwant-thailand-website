@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
   <title>UWANT Thailand | Smart Cleaning Technology</title>
 
   <style>
@@ -17,14 +18,35 @@
     }
 
     body {
-      font-family: Arial, "Noto Sans Thai", sans-serif;
+      font-family: Arial, "Noto Sans Thai", Tahoma, sans-serif;
       color: #111;
       background: #fff;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* =====================
+    body.mobile-menu-open {
+      overflow: hidden;
+    }
+
+    img,
+    video {
+      max-width: 100%;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    section[id],
+    article[id] {
+      scroll-margin-top: 100px;
+    }
+
+    /* =========================
        HEADER
-    ===================== */
+    ========================= */
 
     .header {
       height: 76px;
@@ -33,10 +55,34 @@
       justify-content: space-between;
       padding: 0 5%;
       background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid #eee;
       position: sticky;
       top: 0;
       z-index: 1000;
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+
+    .header.scrolled {
+      box-shadow: 0 8px 26px rgba(0,0,0,.06);
+      background: rgba(255,255,255,.99);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .logo:hover {
+      transform: translateY(-1px);
+      opacity: .78;
+    }
+
+    .logo:active {
+      transform: translateY(1px) scale(.99);
     }
 
     .logo img {
@@ -50,26 +96,261 @@
       gap: 34px;
     }
 
-    .nav a {
+    .nav-link {
+      position: relative;
       text-decoration: none;
       color: #111;
       font-size: 15px;
+      padding: 28px 0 26px;
+      transition: opacity .2s ease;
     }
 
-    .nav a:hover {
-      opacity: 0.55;
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 20px;
+      width: 100%;
+      height: 1px;
+      background: #111;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .22s ease;
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
     .buy-button {
+      text-decoration: none;
       background: #111;
-      color: #fff !important;
+      color: #fff;
       padding: 12px 24px;
+      border: 1px solid #111;
       border-radius: 28px;
+      font-size: 15px;
+      transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
     }
 
-    /* =====================
+    .buy-button:hover {
+      background: #fff;
+      color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(0,0,0,.10);
+    }
+
+    .buy-button:active {
+      transform: translateY(1px) scale(.99);
+      box-shadow: none;
+    }
+
+    /* =========================
+       DESKTOP PRODUCTS MEGA MENU
+    ========================= */
+
+    .products-menu {
+      position: static;
+    }
+
+    .products-trigger {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-arrow {
+      font-size: 13px;
+      transition: transform .22s ease;
+    }
+
+    .products-menu:hover .nav-arrow,
+    .products-menu:focus-within .nav-arrow {
+      transform: rotate(180deg);
+    }
+
+    .mega-menu {
+      position: absolute;
+      top: 76px;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,.995);
+      border-top: 1px solid #eee;
+      box-shadow: 0 18px 40px rgba(0,0,0,.09);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity .20s ease, transform .20s ease, visibility .20s ease;
+      z-index: 950;
+    }
+
+    .products-menu:hover .mega-menu,
+    .products-menu:focus-within .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .products-menu.menu-suppressed .mega-menu {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      transform: translateY(-8px) !important;
+    }
+
+    .mega-inner {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 30px 5% 28px;
+    }
+
+    .mega-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .mega-title-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 12px;
+      text-decoration: none;
+      color: #111;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .mega-title-link:hover {
+      transform: translateX(3px);
+      opacity: .7;
+    }
+
+    .mega-title-link strong {
+      font-size: 24px;
+    }
+
+    .mega-title-link small {
+      color: #999;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .product-category-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .mega-category {
+      min-width: 0;
+    }
+
+    .mega-category-heading {
+      display: block;
+      color: #111;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 8px 8px 10px;
+      margin: 0 -8px 6px;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .mega-category-heading:hover {
+      background: #f4f4f4;
+      transform: translateY(-2px);
+    }
+
+    .mega-category-heading:active {
+      transform: translateY(1px);
+    }
+
+    .mega-category-heading h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .mega-category-heading p {
+      color: #999;
+      font-size: 11px;
+    }
+
+    .mega-product-link {
+      display: block;
+      padding: 8px 10px;
+      margin: 1px -10px;
+      color: #555;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 9px;
+      transition: color .2s ease, background .2s ease, transform .2s ease;
+    }
+
+    .mega-product-link:hover {
+      color: #111;
+      background: #f4f4f4;
+      transform: translateX(4px);
+    }
+
+    .mega-product-link:active {
+      transform: translateX(2px) translateY(1px);
+    }
+
+    .mega-accessories {
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px solid #e9e9e9;
+    }
+
+    .mega-accessories-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 13px 16px;
+      margin: 0 -16px;
+      border-radius: 12px;
+      color: #111;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .mega-accessories-link:hover {
+      background: #f3f3f3;
+      transform: translateY(-2px);
+    }
+
+    .mega-accessories-link:active {
+      transform: translateY(1px);
+    }
+
+    .mega-accessories-link span:first-child {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .mega-accessories-link small {
+      color: #999;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      margin-left: 8px;
+    }
+
+    .mega-accessories-arrow {
+      font-size: 20px;
+      transition: transform .2s ease;
+    }
+
+    .mega-accessories-link:hover .mega-accessories-arrow {
+      transform: translateX(5px);
+    }
+
+    /* =========================
        MOBILE MENU
-    ===================== */
+    ========================= */
 
     .menu-button {
       display: none;
@@ -78,6 +359,16 @@
       border: none;
       background: transparent;
       cursor: pointer;
+      border-radius: 50%;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .menu-button:hover {
+      background: #f2f2f2;
+    }
+
+    .menu-button:active {
+      transform: scale(.96);
     }
 
     .menu-button span {
@@ -86,6 +377,19 @@
       height: 2px;
       background: #111;
       margin: 6px auto;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+
+    .menu-button.open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-button.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-button.open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
     }
 
     .mobile-menu {
@@ -96,37 +400,139 @@
       width: 100%;
       max-height: calc(100vh - 76px);
       overflow-y: auto;
-      background: white;
-      padding: 20px 6% 30px;
+      background: rgba(255,255,255,.995);
+      padding: 18px 6% 30px;
       z-index: 999;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      box-shadow: 0 14px 32px rgba(0,0,0,.08);
     }
 
     .mobile-menu.open {
       display: block;
     }
 
-    .mobile-menu a {
+    .mobile-menu > a {
       display: block;
       text-decoration: none;
       color: #111;
-      padding: 16px 0;
+      padding: 17px 0;
       font-size: 18px;
       border-bottom: 1px solid #eee;
+      transition: padding-left .2s ease, background .2s ease;
     }
 
-    .mobile-menu .mobile-buy {
+    .mobile-menu > a:active {
+      padding-left: 6px;
+    }
+
+    .mobile-buy {
       background: #111;
-      color: white;
+      color: #fff !important;
       text-align: center;
       border-radius: 30px;
       margin-top: 20px;
-      border: none;
+      border: 1px solid #111 !important;
     }
 
-    /* =====================
+    .mobile-products {
+      border-bottom: 1px solid #eee;
+    }
+
+    .mobile-section-button {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      border: none;
+      padding: 18px 0;
+      color: #111;
+      font-family: inherit;
+      font-size: 18px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .mobile-plus {
+      font-size: 26px;
+      font-weight: 300;
+      line-height: 1;
+      transition: transform .25s ease;
+    }
+
+    .mobile-products.open .mobile-plus {
+      transform: rotate(45deg);
+    }
+
+    .mobile-products-content {
+      display: none;
+      padding-bottom: 18px;
+    }
+
+    .mobile-products.open .mobile-products-content {
+      display: block;
+    }
+
+    .mobile-category {
+      padding: 15px 0 16px 14px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .mobile-category-heading {
+      display: block;
+      color: #111;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+
+    .mobile-category-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .mobile-category-title small {
+      display: block;
+      margin-top: 3px;
+      color: #999;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: .5px;
+    }
+
+    .mobile-product-link {
+      display: block;
+      border: none !important;
+      padding: 8px 0 !important;
+      font-size: 15px !important;
+      color: #555 !important;
+      text-decoration: none;
+    }
+
+    .mobile-accessories-link {
+      display: flex !important;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      padding: 18px 0 !important;
+      border-top: 2px solid #111 !important;
+      border-bottom: 0 !important;
+      color: #111 !important;
+      font-size: 17px !important;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .mobile-accessories-link small {
+      display: block;
+      color: #999;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      margin-top: 2px;
+    }
+
+    /* =========================
        VIDEO COMMON
-    ===================== */
+    ========================= */
 
     .hero,
     .feature-section {
@@ -156,9 +562,9 @@
       pointer-events: none;
     }
 
-    /* =====================
+    /* =========================
        FIRST VIDEO - DESKTOP
-    ===================== */
+    ========================= */
 
     .hero {
       height: calc(100vh - 76px);
@@ -170,9 +576,9 @@
     .hero-overlay {
       background: linear-gradient(
         90deg,
-        rgba(0,0,0,0.58) 0%,
-        rgba(0,0,0,0.30) 42%,
-        rgba(0,0,0,0.06) 75%
+        rgba(0,0,0,.58) 0%,
+        rgba(0,0,0,.30) 42%,
+        rgba(0,0,0,.06) 75%
       );
     }
 
@@ -182,7 +588,7 @@
       width: 90%;
       max-width: 1450px;
       margin: auto;
-      color: white;
+      color: #fff;
       text-align: left;
     }
 
@@ -190,12 +596,12 @@
       font-size: 15px;
       letter-spacing: 3px;
       margin-bottom: 18px;
-      opacity: 0.88;
+      opacity: .88;
     }
 
     .hero h1 {
-      font-size: clamp(58px, 7vw, 105px);
-      line-height: 0.96;
+      font-size: clamp(58px,7vw,105px);
+      line-height: .96;
       font-weight: 700;
       margin-bottom: 25px;
     }
@@ -225,22 +631,41 @@
       border-radius: 30px;
       text-decoration: none;
       font-size: 16px;
+      border: 1px solid #fff;
+      transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
     }
 
     .hero-primary {
-      background: white;
+      background: #fff;
       color: #111;
     }
 
     .hero-secondary {
-      border: 1px solid white;
-      color: white;
-      background: rgba(0,0,0,0.08);
+      color: #fff;
+      background: rgba(0,0,0,.08);
     }
 
-    /* =====================
+    .hero-primary:hover {
+      background: #111;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .hero-secondary:hover {
+      background: #fff;
+      color: #111;
+      transform: translateY(-3px);
+    }
+
+    .hero-primary:active,
+    .hero-secondary:active {
+      transform: translateY(1px) scale(.99);
+    }
+
+    /* =========================
        BRAND INTRO
-    ===================== */
+    ========================= */
 
     .intro {
       padding: 110px 8%;
@@ -268,9 +693,9 @@
       line-height: 1.8;
     }
 
-    /* =====================
+    /* =========================
        SECOND VIDEO - DESKTOP
-    ===================== */
+    ========================= */
 
     .feature-section {
       height: calc(100vh - 76px);
@@ -282,9 +707,9 @@
     .feature-overlay {
       background: linear-gradient(
         0deg,
-        rgba(0,0,0,0.62) 0%,
-        rgba(0,0,0,0.22) 48%,
-        rgba(0,0,0,0.04) 78%
+        rgba(0,0,0,.62) 0%,
+        rgba(0,0,0,.22) 48%,
+        rgba(0,0,0,.04) 78%
       );
     }
 
@@ -295,588 +720,395 @@
       max-width: 1450px;
       margin: 0 auto;
       padding-bottom: 72px;
-      color: white;
+      color: #fff;
     }
 
     .feature-label {
       font-size: 14px;
       letter-spacing: 3px;
-      opacity: 0.82;
+      opacity: .82;
       margin-bottom: 15px;
     }
 
-  .feature-content h2 {
-
-  max-width: 1200px;
-
-  font-size:
-    clamp(36px, 3.5vw, 58px);
-
-  line-height: 1.15;
-
-  margin-bottom: 18px;
-
-  white-space: nowrap;
-}
+    .feature-content h2 {
+      max-width: 1200px;
+      font-size: clamp(36px,3.5vw,58px);
+      line-height: 1.15;
+      margin-bottom: 18px;
+      white-space: nowrap;
+    }
 
     .feature-content p {
       max-width: 650px;
       font-size: 20px;
       line-height: 1.7;
-      opacity: 0.95;
+      opacity: .95;
     }
 
     /* =========================
-   PRODUCTS MEGA MENU
-========================= */
-
-.products-menu {
-  position: static;
-}
-
-.products-trigger {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.nav-arrow {
-  font-size: 14px;
-  transform: translateY(-1px);
-}
-
-.mega-menu {
-  position: absolute;
-
-  top: 76px;
-
-  left: 0;
-
-  width: 100%;
-
-  background: rgba(255,255,255,0.99);
-
-  border-top: 1px solid #eee;
-
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.08);
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  transform: translateY(-8px);
-
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0.2s;
-
-  z-index: 950;
-}
-
-
-.products-menu:hover .mega-menu,
-.products-menu:focus-within .mega-menu {
-
-  opacity: 1;
-
-  visibility: visible;
-
-  transform: translateY(0);
-}
-
-
-.mega-inner {
-
-  max-width: 1500px;
-
-  margin: auto;
-
-  padding:
-    35px 5%
-    40px;
-}
-
-
-.mega-title {
-
-  display: flex;
-
-  align-items: baseline;
-
-  gap: 14px;
-
-  margin-bottom: 28px;
-}
-
-
-.mega-title span {
-
-  font-size: 25px;
-
-  font-weight: 700;
-}
-
-
-.mega-title small {
-
-  font-size: 11px;
-
-  color: #999;
-
-  letter-spacing: 2px;
-}
-
-
-.product-category-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(5, 1fr);
-
-  gap: 36px;
-
-  padding-bottom: 32px;
-}
-
-
-.mega-category h3 {
-
-  font-size: 16px;
-
-  margin-bottom: 5px;
-}
-
-
-.mega-category p {
-
-  color: #999;
-
-  font-size: 11px;
-
-  margin-bottom: 17px;
-}
-
-
-.mega-category a {
-
-  display: block;
-
-  padding: 6px 0;
-
-  font-size: 14px;
-
-  color: #444;
-
-  text-decoration: none;
-}
-
-
-.mega-category a:hover {
-
-  color: #000;
-
-  transform: translateX(3px);
-}
-
-
-.accessories-area {
-
-  border-top:
-    1px solid #e8e8e8;
-
-  padding-top: 28px;
-}
-
-
-.accessories-title {
-
-  font-size: 18px;
-
-  font-weight: 700;
-
-  margin-bottom: 24px;
-}
-
-
-.accessories-title span {
-
-  font-size: 10px;
-
-  font-weight: normal;
-
-  color: #999;
-
-  letter-spacing: 2px;
-
-  margin-left: 10px;
-}
-
-
-.accessories-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 40px;
-}
-
-
-.accessory-group h4 {
-
-  font-size: 14px;
-
-  margin-bottom: 13px;
-}
-
-
-.accessory-group a {
-
-  display: block;
-
-  color: #666;
-
-  font-size: 13px;
-
-  line-height: 1.5;
-
-  padding: 5px 0;
-
-  text-decoration: none;
-}
-
-
-.accessory-group a:hover {
-
-  color: #111;
-}
-
-/* =========================
-   MOBILE PRODUCTS MENU
-========================= */
-
-.mobile-products {
-  border-bottom: 1px solid #eee;
-}
-
-
-.mobile-section-button {
-
-  width: 100%;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
-  background: transparent;
-
-  border: none;
-
-  padding: 18px 0;
-
-  color: #111;
-
-  font-family: inherit;
-
-  font-size: 18px;
-
-  text-align: left;
-
-  cursor: pointer;
-}
-
-
-.mobile-plus {
-
-  font-size: 26px;
-
-  font-weight: 300;
-
-  line-height: 1;
-
-  transition: transform 0.25s ease;
-}
-
-
-.mobile-products.open
-.mobile-plus {
-
-  transform: rotate(45deg);
-}
-
-
-.mobile-products-content {
-
-  display: none;
-
-  padding-bottom: 25px;
-}
-
-
-.mobile-products.open
-.mobile-products-content {
-
-  display: block;
-}
-
-
-.mobile-category {
-
-  padding:
-
-    18px 0
-    18px 18px;
-
-  border-top:
-    1px solid #f0f0f0;
-}
-
-
-.mobile-category-title {
-
-  font-size: 16px;
-
-  font-weight: 700;
-
-  margin-bottom: 10px;
-}
-
-
-.mobile-category-title small {
-
-  display: block;
-
-  margin-top: 3px;
-
-  color: #999;
-
-  font-size: 10px;
-
-  font-weight: 400;
-
-  letter-spacing: 0.5px;
-}
-
-
-.mobile-category a {
-
-  display: block;
-
-  border: none !important;
-
-  padding: 8px 0 !important;
-
-  font-size: 15px !important;
-
-  color: #555 !important;
-}
-
-
-.mobile-accessories-title {
-
-  margin-top: 12px;
-
-  padding:
-
-    23px 0
-    10px;
-
-  border-top:
-    2px solid #111;
-
-  font-size: 18px;
-
-  font-weight: 700;
-}
-
-
-.mobile-accessories-title small {
-
-  display: block;
-
-  margin-top: 4px;
-
-  color: #999;
-
-  font-size: 10px;
-
-  font-weight: normal;
-
-  letter-spacing: 2px;
-}    
-
-/* =========================
-   OUR PRODUCTS
-========================= */
-
-.products-showcase {
-  background: #f5f5f5;
-  padding: 110px 5% 120px;
-}
-
-.products-container {
-  max-width: 1500px;
-  margin: 0 auto;
-}
-
-.products-heading {
-  text-align: center;
-  margin-bottom: 42px;
-}
-
-.products-eyebrow {
-  font-size: 13px;
-  letter-spacing: 3px;
-  color: #999;
-  margin-bottom: 14px;
-}
-
-.products-heading h2 {
-  font-size: 48px;
-  margin-bottom: 14px;
-}
-
-.products-heading p {
-  color: #777;
-  font-size: 18px;
-}
-
-/* 分类按钮 */
-
-.product-filters {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 45px;
-}
-
-.product-filter {
-  border: 1px solid #d8d8d8;
-  background: #fff;
-  color: #333;
-  padding: 11px 20px;
-  border-radius: 30px;
-  font-family: inherit;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.product-filter:hover {
-  border-color: #111;
-}
-
-.product-filter.active {
-  background: #111;
-  color: #fff;
-  border-color: #111;
-}
-
-/* 产品矩阵 */
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.product-card {
-  background: #fff;
-  border-radius: 22px;
-  overflow: hidden;
-  transition:
-    transform 0.28s ease,
-    box-shadow 0.28s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.08);
-}
-
-.product-card.is-hidden {
-  display: none;
-}
-
-.product-image {
-  height: 360px;
-  background: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 28px;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transition: transform 0.35s ease;
-}
-
-.product-card:hover .product-image img {
-  transform: scale(1.035);
-}
-
-.product-info {
-  padding: 27px 28px 30px;
-}
-
-.product-category {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 10px;
-}
-
-.product-info h3 {
-  font-size: 29px;
-  margin-bottom: 9px;
-}
-
-.product-description {
-  min-height: 27px;
-  color: #666;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.product-link {
-  display: inline-block;
-  margin-top: 22px;
-  color: #111;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/* 平板 */
-
-@media (max-width: 1100px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-    
-    /* =====================
+       OUR PRODUCTS
+    ========================= */
+
+    .products-showcase {
+      background: #f5f5f5;
+      padding: 110px 5% 120px;
+    }
+
+    .products-container {
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .products-heading {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .section-eyebrow {
+      font-size: 13px;
+      letter-spacing: 3px;
+      color: #999;
+      margin-bottom: 14px;
+    }
+
+    .products-heading h2,
+    .accessories-heading h2,
+    .support-heading h2 {
+      font-size: 48px;
+      margin-bottom: 14px;
+    }
+
+    .products-heading p,
+    .accessories-heading p,
+    .support-heading p {
+      color: #777;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .product-filters,
+    .accessory-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 45px;
+    }
+
+    .product-filter,
+    .accessory-filter {
+      border: 1px solid #d8d8d8;
+      background: #fff;
+      color: #333;
+      padding: 11px 20px;
+      border-radius: 30px;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+
+    .product-filter:hover,
+    .accessory-filter:hover {
+      border-color: #111;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.07);
+    }
+
+    .product-filter:active,
+    .accessory-filter:active {
+      transform: translateY(1px) scale(.99);
+      box-shadow: none;
+    }
+
+    .product-filter.active,
+    .accessory-filter.active {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* Flex 替代固定三列 Grid：筛选后 1/2 张卡片也会自动居中 */
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    .product-card {
+      flex: 0 1 calc((100% - 48px) / 3);
+      max-width: 470px;
+      min-width: 300px;
+      background: #fff;
+      border-radius: 22px;
+      overflow: hidden;
+      transition: transform .28s ease, box-shadow .28s ease, outline-color .28s ease;
+      outline: 2px solid transparent;
+      outline-offset: 3px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 48px rgba(0,0,0,.10);
+    }
+
+    .product-card:active {
+      transform: translateY(-2px) scale(.997);
+    }
+
+    .product-card.focus-card {
+      outline-color: #111;
+      box-shadow: 0 22px 54px rgba(0,0,0,.14);
+    }
+
+    .product-card.is-hidden,
+    .accessory-panel.is-hidden {
+      display: none !important;
+    }
+
+    .product-image {
+      height: 360px;
+      background: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 28px;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform .38s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.045);
+    }
+
+    .product-info {
+      padding: 27px 28px 30px;
+    }
+
+    .product-category {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .product-info h3 {
+      font-size: 29px;
+      margin-bottom: 9px;
+    }
+
+    .product-description {
+      min-height: 48px;
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .product-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #111;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .22s ease;
+    }
+
+    .product-card:hover .product-link {
+      transform: translateX(5px);
+    }
+
+    /* =========================
+       ACCESSORIES
+    ========================= */
+
+    .accessories-section {
+      padding: 110px 5% 120px;
+      background: #fff;
+    }
+
+    .accessories-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .accessories-heading,
+    .support-heading {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .accessory-panels {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    .accessory-panel {
+      flex: 1 1 300px;
+      max-width: 660px;
+      min-width: 280px;
+      background: #f6f6f6;
+      border: 1px solid #ececec;
+      border-radius: 20px;
+      padding: 30px;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .accessory-panel:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 38px rgba(0,0,0,.08);
+      background: #fff;
+    }
+
+    .accessory-panel h3 {
+      font-size: 21px;
+      margin-bottom: 5px;
+    }
+
+    .accessory-panel > p {
+      color: #999;
+      font-size: 12px;
+      letter-spacing: .8px;
+      margin-bottom: 20px;
+    }
+
+    .accessory-items {
+      display: grid;
+      gap: 10px;
+    }
+
+    .accessory-item {
+      padding: 14px 16px;
+      background: #fff;
+      border-radius: 12px;
+      color: #444;
+      font-size: 14px;
+      line-height: 1.55;
+      border: 1px solid #eee;
+      transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .accessory-item:hover {
+      transform: translateX(4px);
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    /* =========================
+       SUPPORT
+    ========================= */
+
+    .support-section {
+      padding: 105px 5% 110px;
+      background: #111;
+      color: #fff;
+    }
+
+    .support-container {
+      max-width: 1250px;
+      margin: 0 auto;
+    }
+
+    .support-heading .section-eyebrow,
+    .support-heading p {
+      color: #aaa;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+
+    .support-card {
+      min-height: 180px;
+      padding: 28px;
+      border: 1px solid #333;
+      border-radius: 18px;
+      background: #171717;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .support-card:hover {
+      transform: translateY(-5px);
+      background: #fff;
+      color: #111;
+      border-color: #fff;
+    }
+
+    .support-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .support-card p {
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.7;
+      transition: color .25s ease;
+    }
+
+    .support-card:hover p {
+      color: #666;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      padding: 30px 5%;
+      border-top: 1px solid #222;
+      background: #111;
+      color: #777;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (max-width: 1100px) and (min-width: 851px) {
+      .nav {
+        gap: 22px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+      }
+
+      .product-category-grid {
+        gap: 18px;
+      }
+
+      .product-card {
+        flex-basis: calc((100% - 24px) / 2);
+        max-width: 600px;
+      }
+    }
+
+    /* =========================
        MOBILE
-    ===================== */
+    ========================= */
 
     @media (max-width: 850px) {
-
       .header {
         height: 68px;
         padding: 0 20px;
       }
 
       .logo img {
-        width: 105px;
+        width: 112px;
       }
 
       .nav {
@@ -889,22 +1121,27 @@
 
       .mobile-menu {
         top: 68px;
+        max-height: calc(100vh - 68px);
       }
 
-      /* 第一段视频：完整16:9显示 */
+      section[id],
+      article[id] {
+        scroll-margin-top: 86px;
+      }
 
+      /* 首屏视频：手机保持完整16:9，不裁切 */
       .hero {
         height: auto;
         min-height: 0;
         display: block;
-        background: white;
+        background: #fff;
       }
 
       .hero-media {
         position: relative;
         inset: auto;
         width: 100%;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 16/9;
         background: #000;
       }
 
@@ -968,7 +1205,8 @@
 
       .hero-primary {
         background: #111;
-        color: white;
+        color: #fff;
+        border-color: #111;
       }
 
       .hero-secondary {
@@ -989,20 +1227,19 @@
         font-size: 17px;
       }
 
-      /* 第二段视频：同样完整16:9，不裁切 */
-
+      /* 第二段视频：手机同样完整16:9 */
       .feature-section {
         height: auto;
         min-height: 0;
         display: block;
-        background: white;
+        background: #fff;
       }
 
       .feature-media {
         position: relative;
         inset: auto;
         width: 100%;
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 16/9;
         background: #000;
       }
 
@@ -1046,56 +1283,94 @@
         color: #666;
         font-size: 17px;
       }
-.products-showcase {
-  padding: 75px 18px 85px;
-}
 
-.products-heading {
-  margin-bottom: 30px;
-}
+      .products-showcase,
+      .accessories-section {
+        padding: 75px 18px 85px;
+      }
 
-.products-heading h2 {
-  font-size: 36px;
-}
+      .products-heading,
+      .accessories-heading,
+      .support-heading {
+        margin-bottom: 30px;
+      }
 
-.products-heading p {
-  font-size: 16px;
-}
+      .products-heading h2,
+      .accessories-heading h2,
+      .support-heading h2 {
+        font-size: 36px;
+      }
 
-.product-filters {
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  margin-bottom: 30px;
-  scrollbar-width: none;
-}
+      .products-heading p,
+      .accessories-heading p,
+      .support-heading p {
+        font-size: 16px;
+      }
 
-.product-filters::-webkit-scrollbar {
-  display: none;
-}
+      .product-filters,
+      .accessory-filters {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 7px;
+        margin-bottom: 30px;
+        scrollbar-width: none;
+      }
 
-.product-filter {
-  flex: 0 0 auto;
-}
+      .product-filters::-webkit-scrollbar,
+      .accessory-filters::-webkit-scrollbar {
+        display: none;
+      }
 
-.product-grid {
-  grid-template-columns: 1fr;
-  gap: 18px;
-}
+      .product-filter,
+      .accessory-filter {
+        flex: 0 0 auto;
+      }
 
-.product-image {
-  height: 330px;
-}
+      .product-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
 
-.product-info {
-  padding: 23px 22px 27px;
-}
+      .product-card {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        flex-basis: auto;
+      }
 
-.product-info h3 {
-  font-size: 27px;
-}
-      
+      /* 按你的要求：手机产品图尺寸保持现在的 330px */
+      .product-image {
+        height: 330px;
+      }
+
+      .product-info {
+        padding: 23px 22px 27px;
+      }
+
+      .product-info h3 {
+        font-size: 27px;
+      }
+
+      .accessory-panels {
+        display: block;
+      }
+
+      .accessory-panel {
+        max-width: none;
+        min-width: 0;
+        margin-bottom: 16px;
+        padding: 24px 20px;
+      }
+
+      .support-section {
+        padding: 78px 18px 84px;
+      }
+
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1107,492 +1382,219 @@
         font-size: 31px;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
   </style>
 </head>
 
 <body id="top">
 
-  <header class="header">
+  <!-- =========================
+       HEADER
+  ========================== -->
+  <header class="header" id="siteHeader">
 
-    <a class="logo" href="#top">
+    <a class="logo" href="#top" data-scroll-target="top" aria-label="UWANT Thailand Home">
       <img src="./LOGO.png?v=4" alt="UWANT">
     </a>
 
-<nav class="nav">
+    <nav class="nav" aria-label="Main navigation">
 
-  <div class="products-menu">
+      <div class="products-menu" id="desktopProductsMenu">
+        <a href="#products" class="nav-link products-trigger" data-filter-link="all">
+          ผลิตภัณฑ์
+          <span class="nav-arrow">⌄</span>
+        </a>
 
-    <a href="#products" class="products-trigger">
-      ผลิตภัณฑ์
-      <span class="nav-arrow">⌄</span>
-    </a>
+        <div class="mega-menu">
+          <div class="mega-inner">
 
-    <div class="mega-menu">
+            <div class="mega-topline">
+              <a href="#products" class="mega-title-link" data-filter-link="all">
+                <strong>ผลิตภัณฑ์</strong>
+                <small>PRODUCTS</small>
+              </a>
+            </div>
 
-      <div class="mega-inner">
+            <div class="product-category-grid">
 
-        <div class="mega-title">
-          <span>ผลิตภัณฑ์</span>
-          <small>PRODUCTS</small>
+              <div class="mega-category">
+                <a href="#products" class="mega-category-heading" data-filter-link="vacuum">
+                  <h3>เครื่องดูดฝุ่น</h3>
+                  <p>Vacuum Cleaners</p>
+                </a>
+                <a href="#product-v500" class="mega-product-link" data-product-target="product-v500" data-filter="vacuum">V500</a>
+                <a href="#product-v500-max" class="mega-product-link" data-product-target="product-v500-max" data-filter="vacuum">V500 MAX</a>
+              </div>
+
+              <div class="mega-category">
+                <a href="#products" class="mega-category-heading" data-filter-link="floor-washer">
+                  <h3>เครื่องดูดฝุ่นถูพื้น</h3>
+                  <p>Floor Washers</p>
+                </a>
+                <a href="#product-d700" class="mega-product-link" data-product-target="product-d700" data-filter="floor-washer">D700</a>
+                <a href="#product-d700-pro" class="mega-product-link" data-product-target="product-d700-pro" data-filter="floor-washer">D700 Pro</a>
+              </div>
+
+              <div class="mega-category">
+                <a href="#products" class="mega-category-heading" data-filter-link="mite">
+                  <h3>เครื่องดูดไรฝุ่น</h3>
+                  <p>Mite Removers</p>
+                </a>
+                <a href="#product-m400" class="mega-product-link" data-product-target="product-m400" data-filter="mite">M400</a>
+                <a href="#product-m600" class="mega-product-link" data-product-target="product-m600" data-filter="mite">M600</a>
+              </div>
+
+              <div class="mega-category">
+                <a href="#products" class="mega-category-heading" data-filter-link="upholstery">
+                  <h3>เครื่องทำความสะอาดเบาะและพรม</h3>
+                  <p>Upholstery Cleaners</p>
+                </a>
+                <a href="#product-b100s" class="mega-product-link" data-product-target="product-b100s" data-filter="upholstery">B100S</a>
+                <a href="#product-y100s" class="mega-product-link" data-product-target="product-y100s" data-filter="upholstery">Y100S</a>
+              </div>
+
+              <div class="mega-category">
+                <a href="#products" class="mega-category-heading" data-filter-link="robot">
+                  <h3>หุ่นยนต์ดูดฝุ่น</h3>
+                  <p>Robot Vacuums</p>
+                </a>
+                <a href="#product-u300" class="mega-product-link" data-product-target="product-u300" data-filter="robot">U300</a>
+              </div>
+
+            </div>
+
+            <div class="mega-accessories">
+              <a href="#accessories" class="mega-accessories-link" data-scroll-target="accessories">
+                <span>
+                  อุปกรณ์เสริม
+                  <small>ACCESSORIES</small>
+                </span>
+                <span class="mega-accessories-arrow">→</span>
+              </a>
+            </div>
+
+          </div>
         </div>
-
-
-        <div class="product-category-grid">
-
-          <div class="mega-category">
-            <h3>เครื่องดูดฝุ่น</h3>
-            <p>Vacuum Cleaners</p>
-
-            <a href="#products">V500</a>
-            <a href="#products">V500 MAX</a>
-          </div>
-
-
-          <div class="mega-category">
-            <h3>เครื่องดูดฝุ่นถูพื้น</h3>
-            <p>Floor Washers</p>
-
-            <a href="#products">D700</a>
-            <a href="#products">D700 Pro</a>
-          </div>
-
-
-          <div class="mega-category">
-            <h3>เครื่องดูดไรฝุ่น</h3>
-            <p>Mite Removers</p>
-
-            <a href="#products">M400</a>
-            <a href="#products">M600</a>
-          </div>
-
-
-          <div class="mega-category">
-            <h3>เครื่องทำความสะอาดเบาะและพรม</h3>
-            <p>Upholstery Cleaners</p>
-
-            <a href="#products">B100S</a>
-            <a href="#products">Y100S</a>
-          </div>
-
-
-          <div class="mega-category">
-            <h3>หุ่นยนต์ดูดฝุ่น</h3>
-            <p>Robot Vacuums</p>
-
-            <a href="#products">U300</a>
-          </div>
-
-        </div>
-
-
-        <div class="accessories-area">
-
-          <div class="accessories-title">
-            อุปกรณ์เสริม
-            <span>ACCESSORIES</span>
-          </div>
-
-
-          <div class="accessories-grid">
-
-
-            <div class="accessory-group">
-
-              <h4>
-                เครื่องดูดฝุ่น
-              </h4>
-
-              <a href="#products">
-                ชุดถุงเก็บฝุ่น 3 ชิ้น + HEPA 2 ชิ้น
-              </a>
-
-              <a href="#products">
-                ชุดแปรงขนสัตว์เลี้ยง
-              </a>
-
-            </div>
-
-
-            <div class="accessory-group">
-
-              <h4>
-                เครื่องดูดฝุ่นถูพื้น
-              </h4>
-
-              <a href="#products">
-                น้ำยาทำความสะอาด 500ML
-              </a>
-
-              <a href="#products">
-                HEPA
-              </a>
-
-              <a href="#products">
-                แท่งกำจัดกลิ่น D700 Pro
-              </a>
-
-            </div>
-
-
-            <div class="accessory-group">
-
-              <h4>
-                เครื่องดูดไรฝุ่น
-              </h4>
-
-              <a href="#products">
-                ไส้กรองฟองน้ำ 3 ชิ้น
-              </a>
-
-            </div>
-
-
-            <div class="accessory-group">
-
-              <h4>
-                U300
-              </h4>
-
-              <a href="#products">
-                ชุดกล่องเก็บฝุ่นและไส้กรอง
-              </a>
-
-              <a href="#products">
-                น้ำยาทำความสะอาดพื้น
-              </a>
-
-              <a href="#products">
-                ชุดลูกกลิ้งถูพื้น
-              </a>
-
-              <a href="#products">
-                แปรงลูกกลิ้งแบบยางและขน
-              </a>
-
-              <a href="#products">
-                ถุงเก็บฝุ่นป้องกันแบคทีเรีย
-              </a>
-
-              <a href="#products">
-                ชุดแปรงข้างซ้ายและขวา
-              </a>
-
-            </div>
-
-
-          </div>
-
-        </div>
-
       </div>
 
-    </div>
+      <a href="#technology" class="nav-link" data-scroll-target="technology">เทคโนโลยี</a>
+      <a href="#support" class="nav-link" data-scroll-target="support">บริการและการสนับสนุน</a>
+      <a href="#about" class="nav-link" data-scroll-target="about">เกี่ยวกับ UWANT</a>
+      <a href="#products" class="buy-button" data-filter-link="all">ซื้อเลย</a>
 
-  </div>
+    </nav>
 
-
-  <a href="#technology">
-    เทคโนโลยี
-  </a>
-
-  <a href="#support">
-    บริการและการสนับสนุน
-  </a>
-
-  <a href="#about">
-    เกี่ยวกับ UWANT
-  </a>
-
-  <a href="#buy"
-     class="buy-button">
-    ซื้อเลย
-  </a>
-
-</nav>
-
-    <button
-      class="menu-button"
-      id="menuButton"
-      aria-label="เปิดเมนู">
-
+    <button class="menu-button" id="menuButton" aria-label="เปิดเมนู" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
-
     </button>
 
   </header>
 
+  <!-- =========================
+       MOBILE MENU
+  ========================== -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
 
-<nav
-  class="mobile-menu"
-  id="mobileMenu">
+    <div class="mobile-products">
+      <button class="mobile-section-button" id="mobileProductsButton" aria-expanded="false">
+        <span>ผลิตภัณฑ์</span>
+        <span class="mobile-plus">+</span>
+      </button>
 
+      <div class="mobile-products-content">
 
-  <!-- 产品 -->
-
-  <div class="mobile-products">
-
-    <button
-      class="mobile-section-button"
-      id="mobileProductsButton">
-
-      <span>
-        ผลิตภัณฑ์
-      </span>
-
-      <span
-        class="mobile-plus"
-        id="mobileProductsPlus">
-        +
-      </span>
-
-    </button>
-
-
-    <div
-      class="mobile-products-content"
-      id="mobileProductsContent">
-
-
-      <!-- 吸尘器 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องดูดฝุ่น
-          <small>Vacuum Cleaners</small>
+        <div class="mobile-category">
+          <a href="#products" class="mobile-category-heading" data-filter-link="vacuum">
+            <div class="mobile-category-title">
+              เครื่องดูดฝุ่น
+              <small>Vacuum Cleaners</small>
+            </div>
+          </a>
+          <a href="#product-v500" class="mobile-product-link" data-product-target="product-v500" data-filter="vacuum">V500</a>
+          <a href="#product-v500-max" class="mobile-product-link" data-product-target="product-v500-max" data-filter="vacuum">V500 MAX</a>
         </div>
 
-        <a href="#products">
-          V500
-        </a>
-
-        <a href="#products">
-          V500 MAX
-        </a>
-
-      </div>
-
-
-      <!-- 洗地机 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องดูดฝุ่นถูพื้น
-          <small>Floor Washers</small>
+        <div class="mobile-category">
+          <a href="#products" class="mobile-category-heading" data-filter-link="floor-washer">
+            <div class="mobile-category-title">
+              เครื่องดูดฝุ่นถูพื้น
+              <small>Floor Washers</small>
+            </div>
+          </a>
+          <a href="#product-d700" class="mobile-product-link" data-product-target="product-d700" data-filter="floor-washer">D700</a>
+          <a href="#product-d700-pro" class="mobile-product-link" data-product-target="product-d700-pro" data-filter="floor-washer">D700 Pro</a>
         </div>
 
-        <a href="#products">
-          D700
-        </a>
-
-        <a href="#products">
-          D700 Pro
-        </a>
-
-      </div>
-
-
-      <!-- 除螨仪 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องดูดไรฝุ่น
-          <small>Mite Removers</small>
+        <div class="mobile-category">
+          <a href="#products" class="mobile-category-heading" data-filter-link="mite">
+            <div class="mobile-category-title">
+              เครื่องดูดไรฝุ่น
+              <small>Mite Removers</small>
+            </div>
+          </a>
+          <a href="#product-m400" class="mobile-product-link" data-product-target="product-m400" data-filter="mite">M400</a>
+          <a href="#product-m600" class="mobile-product-link" data-product-target="product-m600" data-filter="mite">M600</a>
         </div>
 
-        <a href="#products">
-          M400
-        </a>
-
-        <a href="#products">
-          M600
-        </a>
-
-      </div>
-
-
-      <!-- 布艺清洗机 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องทำความสะอาดเบาะและพรม
-          <small>Upholstery Cleaners</small>
+        <div class="mobile-category">
+          <a href="#products" class="mobile-category-heading" data-filter-link="upholstery">
+            <div class="mobile-category-title">
+              เครื่องทำความสะอาดเบาะและพรม
+              <small>Upholstery Cleaners</small>
+            </div>
+          </a>
+          <a href="#product-b100s" class="mobile-product-link" data-product-target="product-b100s" data-filter="upholstery">B100S</a>
+          <a href="#product-y100s" class="mobile-product-link" data-product-target="product-y100s" data-filter="upholstery">Y100S</a>
         </div>
 
-        <a href="#products">
-          B100S
-        </a>
-
-        <a href="#products">
-          Y100S
-        </a>
-
-      </div>
-
-
-      <!-- 扫地机器人 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          หุ่นยนต์ดูดฝุ่น
-          <small>Robot Vacuums</small>
+        <div class="mobile-category">
+          <a href="#products" class="mobile-category-heading" data-filter-link="robot">
+            <div class="mobile-category-title">
+              หุ่นยนต์ดูดฝุ่น
+              <small>Robot Vacuums</small>
+            </div>
+          </a>
+          <a href="#product-u300" class="mobile-product-link" data-product-target="product-u300" data-filter="robot">U300</a>
         </div>
 
-        <a href="#products">
-          U300
+        <a href="#accessories" class="mobile-accessories-link" data-scroll-target="accessories">
+          <span>
+            อุปกรณ์เสริม
+            <small>ACCESSORIES</small>
+          </span>
+          <span>→</span>
         </a>
 
       </div>
-
-
-      <!-- 配件 -->
-
-      <div class="mobile-accessories-title">
-
-        อุปกรณ์เสริม
-
-        <small>
-          ACCESSORIES
-        </small>
-
-      </div>
-
-
-      <!-- 吸尘器配件 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องดูดฝุ่น
-        </div>
-
-        <a href="#products">
-          ชุดถุงเก็บฝุ่น 3 ชิ้น + HEPA 2 ชิ้น
-        </a>
-
-        <a href="#products">
-          ชุดแปรงขนสัตว์เลี้ยง
-        </a>
-
-      </div>
-
-
-      <!-- 洗地机配件 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องดูดฝุ่นถูพื้น
-        </div>
-
-        <a href="#products">
-          น้ำยาทำความสะอาด 500ML
-        </a>
-
-        <a href="#products">
-          HEPA
-        </a>
-
-        <a href="#products">
-          แท่งกำจัดกลิ่น D700 Pro
-        </a>
-
-      </div>
-
-
-      <!-- 除螨仪配件 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          เครื่องดูดไรฝุ่น
-        </div>
-
-        <a href="#products">
-          ไส้กรองฟองน้ำ 3 ชิ้น
-        </a>
-
-      </div>
-
-
-      <!-- U300配件 -->
-
-      <div class="mobile-category">
-
-        <div class="mobile-category-title">
-          U300
-        </div>
-
-        <a href="#products">
-          ชุดกล่องเก็บฝุ่นและไส้กรอง
-        </a>
-
-        <a href="#products">
-          น้ำยาทำความสะอาดพื้น
-        </a>
-
-        <a href="#products">
-          ชุดลูกกลิ้งถูพื้น
-        </a>
-
-        <a href="#products">
-          แปรงลูกกลิ้งแบบยางและขน
-        </a>
-
-        <a href="#products">
-          ถุงเก็บฝุ่นป้องกันแบคทีเรีย
-        </a>
-
-        <a href="#products">
-          ชุดแปรงข้างซ้ายและขวา
-        </a>
-
-      </div>
-
-
     </div>
 
-  </div>
+    <a href="#technology" data-scroll-target="technology">เทคโนโลยี</a>
+    <a href="#support" data-scroll-target="support">บริการและการสนับสนุน</a>
+    <a href="#about" data-scroll-target="about">เกี่ยวกับ UWANT</a>
+    <a href="#products" class="mobile-buy" data-filter-link="all">ซื้อเลย</a>
 
+  </nav>
 
-  <!-- 其他导航 -->
-
-  <a href="#technology">
-    เทคโนโลยี
-  </a>
-
-  <a href="#support">
-    บริการและการสนับสนุน
-  </a>
-
-  <a href="#about">
-    เกี่ยวกับ UWANT
-  </a>
-
-  <a
-    href="#buy"
-    class="mobile-buy">
-    ซื้อเลย
-  </a>
-
-
-</nav>
-
-
-  <!-- 第一段 V500 视频 -->
-
-<section
-  class="hero"
-  id="featured-v500">
+  <!-- =========================
+       HERO
+  ========================== -->
+  <section class="hero" id="featured-v500">
 
     <div class="hero-media">
-
       <video
         class="hero-video"
         id="heroVideo"
@@ -1600,712 +1602,542 @@
         muted
         loop
         playsinline
-        preload="metadata">
-
-        <source
-          src="./v500-hero.mp4"
-          type="video/mp4">
-
+        preload="auto"
+        poster="./v500-hero-cover.jpg?v=2">
+        <source src="./v500-hero.mp4?v=2" type="video/mp4">
       </video>
-
       <div class="hero-overlay"></div>
-
     </div>
-
 
     <div class="hero-content">
-
-      <div class="hero-small">
-        UWANT THAILAND
+      <div class="hero-small">UWANT THAILAND</div>
+      <h1>V500</h1>
+      <div class="hero-model">เครื่องดูดฝุ่นอเนกประสงค์</div>
+      <div class="hero-description">
+        พลังทำความสะอาดที่ยืดหยุ่น สำหรับทุกพื้นที่ในบ้าน
       </div>
-
-      <h1>
-        V500
-      </h1>
-
-      <div class="hero-model">
-        เครื่องดูดฝุ่นอเนกประสงค์
-      </div>
-
-      <p class="hero-description">
-        พลังทำความสะอาดที่ยืดหยุ่น
-        สำหรับทุกพื้นที่ในบ้าน
-      </p>
 
       <div class="hero-buttons">
-
-        <a
-          href="#technology"
-          class="hero-primary">
-          ดูรายละเอียด
-        </a>
-
-        <a
-          href="#buy"
-          class="hero-secondary">
-          ซื้อเลย
-        </a>
-
+        <a href="#product-v500" class="hero-primary" data-product-target="product-v500" data-filter="vacuum">ดูรายละเอียด</a>
+        <a href="#products" class="hero-secondary" data-filter-link="all">ซื้อเลย</a>
       </div>
-
     </div>
 
   </section>
 
-
-  <!-- 品牌介绍 -->
-
-  <section
-    class="intro"
-    id="about">
-
-    <div class="intro-label">
-      SMART CLEANING TECHNOLOGY
-    </div>
-
-    <h2>
-      Cleaning Made Smarter
-    </h2>
-
+  <!-- =========================
+       ABOUT / BRAND INTRO
+  ========================== -->
+  <section class="intro" id="about">
+    <div class="intro-label">SMART CLEANING TECHNOLOGY</div>
+    <h2>Cleaning Made Smarter</h2>
     <p>
-      UWANT พัฒนาเทคโนโลยีการทำความสะอาดอัจฉริยะ
-      เพื่อช่วยให้การดูแลบ้านเป็นเรื่องง่าย
-      สะดวก และมีประสิทธิภาพมากยิ่งขึ้น
+      UWANT มุ่งพัฒนาเทคโนโลยีการทำความสะอาดที่ชาญฉลาด ใช้งานง่าย
+      และตอบโจทย์การดูแลบ้านในชีวิตประจำวัน เพื่อให้ทุกพื้นที่สะอาดขึ้น
+      ด้วยประสบการณ์ที่สะดวกและมีประสิทธิภาพยิ่งกว่าเดิม
     </p>
-
   </section>
 
-
-  <!-- 第二段 V500 多功能视频 -->
-
-  <section
-    class="feature-section"
-    id="technology">
+  <!-- =========================
+       TECHNOLOGY / FEATURE VIDEO
+  ========================== -->
+  <section class="feature-section" id="technology">
 
     <div class="feature-media">
-
       <video
         class="feature-video"
         id="featureVideo"
         muted
         loop
         playsinline
-        preload="metadata">
-
-        <source
-          src="./v500-features.mp4.mp4"
-          type="video/mp4">
-
+        preload="metadata"
+        poster="./v500-features-cover.jpg?v=2">
+        <source src="./v500-features.mp4?v=2" type="video/mp4">
       </video>
-
       <div class="feature-overlay"></div>
-
     </div>
 
-
     <div class="feature-content">
-
-      <div class="feature-label">
-        UWANT V500
-      </div>
-
-      <h2>
-        หนึ่งเครื่อง หลากหลายการทำความสะอาด
-      </h2>
-
+      <div class="feature-label">VERSATILE CLEANING</div>
+      <h2>หนึ่งเครื่อง หลากหลายการทำความสะอาด</h2>
       <p>
-        ออกแบบมาเพื่อรองรับการทำความสะอาด
-        หลายรูปแบบในบ้านได้อย่างสะดวกยิ่งขึ้น
+        ออกแบบมาเพื่อรองรับการทำความสะอาดหลากหลายพื้นที่
+        ให้ทุกงานดูแลบ้านเป็นเรื่องง่ายและคล่องตัวยิ่งขึ้น
       </p>
-
     </div>
 
   </section>
 
   <!-- =========================
-     OUR PRODUCTS
-========================= -->
+       PRODUCTS
+  ========================== -->
+  <section class="products-showcase" id="products">
 
-<section
-  class="products-showcase"
-  id="products">
+    <div class="products-container">
 
-  <div class="products-container">
-
-    <div class="products-heading">
-
-      <div class="products-eyebrow">
-        UWANT PRODUCT COLLECTION
+      <div class="products-heading">
+        <div class="section-eyebrow">UWANT PRODUCT COLLECTION</div>
+        <h2>ผลิตภัณฑ์ของเรา</h2>
+        <p>เทคโนโลยีการทำความสะอาดสำหรับทุกพื้นที่ในบ้าน</p>
       </div>
 
-      <h2>
-        ผลิตภัณฑ์ของเรา
-      </h2>
+      <div class="product-filters" aria-label="Product categories">
+        <button class="product-filter active" data-filter="all" aria-pressed="true">ทั้งหมด</button>
+        <button class="product-filter" data-filter="vacuum" aria-pressed="false">เครื่องดูดฝุ่น</button>
+        <button class="product-filter" data-filter="floor-washer" aria-pressed="false">เครื่องดูดฝุ่นถูพื้น</button>
+        <button class="product-filter" data-filter="mite" aria-pressed="false">เครื่องดูดไรฝุ่น</button>
+        <button class="product-filter" data-filter="upholstery" aria-pressed="false">เครื่องทำความสะอาดเบาะและพรม</button>
+        <button class="product-filter" data-filter="robot" aria-pressed="false">หุ่นยนต์ดูดฝุ่น</button>
+      </div>
 
-      <p>
-        เทคโนโลยีการทำความสะอาดสำหรับทุกพื้นที่ในบ้าน
-      </p>
+      <div class="product-grid">
+
+        <article class="product-card" id="product-v500" data-category="vacuum">
+          <div class="product-image">
+            <img src="./v500.webp" alt="UWANT V500" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องดูดฝุ่น · Vacuum Cleaner</div>
+            <h3>V500</h3>
+            <div class="product-description">เครื่องดูดฝุ่นอเนกประสงค์สำหรับการทำความสะอาดในทุกวัน</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-v500-max" data-category="vacuum">
+          <div class="product-image">
+            <img src="./v500-max.webp" alt="UWANT V500 MAX" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องดูดฝุ่น · Vacuum Cleaner</div>
+            <h3>V500 MAX</h3>
+            <div class="product-description">รุ่นอัปเกรดสำหรับการทำความสะอาดที่หลากหลายยิ่งขึ้น</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-d700" data-category="floor-washer">
+          <div class="product-image">
+            <img src="./d700.webp" alt="UWANT D700" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องดูดฝุ่นถูพื้น · Floor Washer</div>
+            <h3>D700</h3>
+            <div class="product-description">ดูดฝุ่นและถูพื้นในขั้นตอนเดียว</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-d700-pro" data-category="floor-washer">
+          <div class="product-image">
+            <img src="./d700-pro.webp" alt="UWANT D700 Pro" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องดูดฝุ่นถูพื้น · Floor Washer</div>
+            <h3>D700 Pro</h3>
+            <div class="product-description">รุ่น Pro สำหรับการทำความสะอาดพื้นอย่างมีประสิทธิภาพ</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-m400" data-category="mite">
+          <div class="product-image">
+            <img src="./m400.webp" alt="UWANT M400" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องดูดไรฝุ่น · Mite Remover</div>
+            <h3>M400</h3>
+            <div class="product-description">สำหรับดูแลที่นอน โซฟา และพื้นผิวผ้า</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-m600" data-category="mite">
+          <div class="product-image">
+            <img src="./m600.webp" alt="UWANT M600" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องดูดไรฝุ่น · Mite Remover</div>
+            <h3>M600</h3>
+            <div class="product-description">การดูแลพื้นผิวผ้าด้วยประสิทธิภาพที่เหนือกว่า</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-b100s" data-category="upholstery">
+          <div class="product-image">
+            <img src="./b100s.webp" alt="UWANT B100S" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องทำความสะอาดเบาะและพรม</div>
+            <h3>B100S</h3>
+            <div class="product-description">สำหรับทำความสะอาดโซฟา พรม และพื้นผิวผ้าภายในบ้าน</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-y100s" data-category="upholstery">
+          <div class="product-image">
+            <img src="./y100s.webp" alt="UWANT Y100S" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">เครื่องทำความสะอาดเบาะและพรม</div>
+            <h3>Y100S</h3>
+            <div class="product-description">ทางเลือกสำหรับการทำความสะอาดคราบบนพื้นผิวผ้า</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+        <article class="product-card" id="product-u300" data-category="robot">
+          <div class="product-image">
+            <img src="./u300.webp" alt="UWANT U300" loading="lazy" decoding="async">
+          </div>
+          <div class="product-info">
+            <div class="product-category">หุ่นยนต์ดูดฝุ่น · Robot Vacuum</div>
+            <h3>U300</h3>
+            <div class="product-description">ระบบทำความสะอาดอัตโนมัติสำหรับบ้านยุคใหม่</div>
+            <span class="product-link">ดูรายละเอียด →</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       ACCESSORIES
+  ========================== -->
+  <section class="accessories-section" id="accessories">
+
+    <div class="accessories-container">
+
+      <div class="accessories-heading">
+        <div class="section-eyebrow">ACCESSORIES & REPLACEMENT PARTS</div>
+        <h2>อุปกรณ์เสริม</h2>
+        <p>เลือกประเภทผลิตภัณฑ์เพื่อค้นหาอุปกรณ์เสริมที่เหมาะกับเครื่องของคุณ</p>
+      </div>
+
+      <div class="accessory-filters" aria-label="Accessory categories">
+        <button class="accessory-filter active" data-accessory-filter="all" aria-pressed="true">ทั้งหมด</button>
+        <button class="accessory-filter" data-accessory-filter="vacuum" aria-pressed="false">เครื่องดูดฝุ่น</button>
+        <button class="accessory-filter" data-accessory-filter="floor-washer" aria-pressed="false">เครื่องดูดฝุ่นถูพื้น</button>
+        <button class="accessory-filter" data-accessory-filter="mite" aria-pressed="false">เครื่องดูดไรฝุ่น</button>
+        <button class="accessory-filter" data-accessory-filter="robot" aria-pressed="false">U300</button>
+      </div>
+
+      <div class="accessory-panels">
+
+        <div class="accessory-panel" data-accessory-category="vacuum">
+          <h3>เครื่องดูดฝุ่น</h3>
+          <p>VACUUM CLEANER ACCESSORIES</p>
+          <div class="accessory-items">
+            <div class="accessory-item">ชุดถุงเก็บฝุ่น 3 ชิ้น + HEPA 2 ชิ้น</div>
+            <div class="accessory-item">ชุดแปรงขนสัตว์เลี้ยง</div>
+          </div>
+        </div>
+
+        <div class="accessory-panel" data-accessory-category="floor-washer">
+          <h3>เครื่องดูดฝุ่นถูพื้น</h3>
+          <p>FLOOR WASHER ACCESSORIES</p>
+          <div class="accessory-items">
+            <div class="accessory-item">น้ำยาทำความสะอาด 500ML</div>
+            <div class="accessory-item">HEPA</div>
+            <div class="accessory-item">แท่งกำจัดกลิ่นสำหรับ D700 Pro</div>
+          </div>
+        </div>
+
+        <div class="accessory-panel" data-accessory-category="mite">
+          <h3>เครื่องดูดไรฝุ่น</h3>
+          <p>MITE REMOVER ACCESSORIES</p>
+          <div class="accessory-items">
+            <div class="accessory-item">ไส้กรองฟองน้ำ 3 ชิ้น</div>
+          </div>
+        </div>
+
+        <div class="accessory-panel" data-accessory-category="robot">
+          <h3>U300</h3>
+          <p>ROBOT VACUUM ACCESSORIES</p>
+          <div class="accessory-items">
+            <div class="accessory-item">ชุดกล่องเก็บฝุ่นและไส้กรอง</div>
+            <div class="accessory-item">น้ำยาทำความสะอาดพื้น</div>
+            <div class="accessory-item">ชุดลูกกลิ้งถูพื้น</div>
+            <div class="accessory-item">แปรงลูกกลิ้งแบบยางและขน</div>
+            <div class="accessory-item">ถุงเก็บฝุ่นป้องกันแบคทีเรีย</div>
+            <div class="accessory-item">ชุดแปรงข้างซ้ายและขวา</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       SUPPORT
+  ========================== -->
+  <section class="support-section" id="support">
+    <div class="support-container">
+
+      <div class="support-heading">
+        <div class="section-eyebrow">UWANT THAILAND SUPPORT</div>
+        <h2>บริการและการสนับสนุน</h2>
+        <p>ข้อมูลผลิตภัณฑ์ การใช้งาน และบริการหลังการขายสำหรับลูกค้า UWANT Thailand</p>
+      </div>
+
+      <div class="support-grid">
+        <div class="support-card">
+          <h3>ข้อมูลผลิตภัณฑ์</h3>
+          <p>ค้นหาข้อมูลสินค้า คุณสมบัติ และรายละเอียดของผลิตภัณฑ์ UWANT แต่ละรุ่น</p>
+        </div>
+        <div class="support-card">
+          <h3>คู่มือการใช้งาน</h3>
+          <p>พื้นที่สำหรับคู่มือการใช้งาน วิธีดูแลรักษา และคำแนะนำสำหรับผลิตภัณฑ์</p>
+        </div>
+        <div class="support-card">
+          <h3>บริการหลังการขาย</h3>
+          <p>ข้อมูลการรับประกัน การดูแลหลังการขาย และช่องทางติดต่อ UWANT Thailand</p>
+        </div>
+      </div>
 
     </div>
-
-
-    <!-- 产品分类 -->
-
-    <div class="product-filters">
-
-      <button
-        class="product-filter active"
-        data-filter="all">
-        ทั้งหมด
-      </button>
-
-      <button
-        class="product-filter"
-        data-filter="vacuum">
-        เครื่องดูดฝุ่น
-      </button>
-
-      <button
-        class="product-filter"
-        data-filter="floor-washer">
-        เครื่องดูดฝุ่นถูพื้น
-      </button>
-
-      <button
-        class="product-filter"
-        data-filter="mite">
-        เครื่องดูดไรฝุ่น
-      </button>
-
-      <button
-        class="product-filter"
-        data-filter="upholstery">
-        เครื่องทำความสะอาดเบาะและพรม
-      </button>
-
-      <button
-        class="product-filter"
-        data-filter="robot">
-        หุ่นยนต์ดูดฝุ่น
-      </button>
-
-    </div>
-
-
-    <div class="product-grid">
-
-
-      <!-- V500 -->
-
-      <article
-        class="product-card"
-        data-category="vacuum">
-
-        <div class="product-image">
-
-          <img
-            src="./v500.png"
-            alt="UWANT V500"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องดูดฝุ่น · Vacuum Cleaner
-          </div>
-
-          <h3>
-            V500
-          </h3>
-
-          <div class="product-description">
-            เครื่องดูดฝุ่นอเนกประสงค์สำหรับการทำความสะอาดในทุกวัน
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- V500 MAX -->
-
-      <article
-        class="product-card"
-        data-category="vacuum">
-
-        <div class="product-image">
-
-          <img
-            src="./v500-max.png"
-            alt="UWANT V500 MAX"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องดูดฝุ่น · Vacuum Cleaner
-          </div>
-
-          <h3>
-            V500 MAX
-          </h3>
-
-          <div class="product-description">
-            รุ่นอัปเกรดสำหรับการทำความสะอาดที่หลากหลายยิ่งขึ้น
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- D700 -->
-
-      <article
-        class="product-card"
-        data-category="floor-washer">
-
-        <div class="product-image">
-
-          <img
-            src="./d700.png"
-            alt="UWANT D700"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องดูดฝุ่นถูพื้น · Floor Washer
-          </div>
-
-          <h3>
-            D700
-          </h3>
-
-          <div class="product-description">
-            ดูดฝุ่นและถูพื้นในขั้นตอนเดียว
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- D700 PRO -->
-
-      <article
-        class="product-card"
-        data-category="floor-washer">
-
-        <div class="product-image">
-
-          <img
-            src="./d700-pro.png"
-            alt="UWANT D700 Pro"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องดูดฝุ่นถูพื้น · Floor Washer
-          </div>
-
-          <h3>
-            D700 Pro
-          </h3>
-
-          <div class="product-description">
-            รุ่น Pro สำหรับการทำความสะอาดพื้นอย่างมีประสิทธิภาพ
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- M400 -->
-
-      <article
-        class="product-card"
-        data-category="mite">
-
-        <div class="product-image">
-
-          <img
-            src="./m400.png"
-            alt="UWANT M400"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องดูดไรฝุ่น · Mite Remover
-          </div>
-
-          <h3>
-            M400
-          </h3>
-
-          <div class="product-description">
-            สำหรับดูแลที่นอน โซฟา และพื้นผิวผ้า
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- M600 -->
-
-      <article
-        class="product-card"
-        data-category="mite">
-
-        <div class="product-image">
-
-          <img
-            src="./m600.png"
-            alt="UWANT M600"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องดูดไรฝุ่น · Mite Remover
-          </div>
-
-          <h3>
-            M600
-          </h3>
-
-          <div class="product-description">
-            การดูแลพื้นผิวผ้าด้วยประสิทธิภาพที่เหนือกว่า
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- B100S -->
-
-      <article
-        class="product-card"
-        data-category="upholstery">
-
-        <div class="product-image">
-
-          <img
-            src="./b100s.png"
-            alt="UWANT B100S"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องทำความสะอาดเบาะและพรม
-          </div>
-
-          <h3>
-            B100S
-          </h3>
-
-          <div class="product-description">
-            สำหรับทำความสะอาดโซฟา พรม และพื้นผิวผ้าภายในบ้าน
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- Y100S -->
-
-      <article
-        class="product-card"
-        data-category="upholstery">
-
-        <div class="product-image">
-
-          <img
-            src="./y100s.png"
-            alt="UWANT Y100S"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            เครื่องทำความสะอาดเบาะและพรม
-          </div>
-
-          <h3>
-            Y100S
-          </h3>
-
-          <div class="product-description">
-            ทางเลือกสำหรับการทำความสะอาดคราบบนพื้นผิวผ้า
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-      <!-- U300 -->
-
-      <article
-        class="product-card"
-        data-category="robot">
-
-        <div class="product-image">
-
-          <img
-            src="./u300.png"
-            alt="UWANT U300"
-            loading="lazy">
-
-        </div>
-
-        <div class="product-info">
-
-          <div class="product-category">
-            หุ่นยนต์ดูดฝุ่น · Robot Vacuum
-          </div>
-
-          <h3>
-            U300
-          </h3>
-
-          <div class="product-description">
-            ระบบทำความสะอาดอัตโนมัติสำหรับบ้านยุคใหม่
-          </div>
-
-          <span class="product-link">
-            ดูรายละเอียด →
-          </span>
-
-        </div>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
+  </section>
+
+  <footer class="footer">
+    © UWANT Thailand · Smart Cleaning Technology
+  </footer>
 
   <script>
+    const header = document.getElementById("siteHeader");
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileProducts = document.querySelector(".mobile-products");
+    const mobileProductsButton = document.getElementById("mobileProductsButton");
+    const desktopProductsMenu = document.getElementById("desktopProductsMenu");
 
-    /* 手机菜单 */
+    /* =========================
+       HEADER SHADOW
+    ========================= */
+    function updateHeaderState() {
+      header.classList.toggle("scrolled", window.scrollY > 8);
+    }
 
-    const menuButton =
-      document.getElementById("menuButton");
+    window.addEventListener("scroll", updateHeaderState, { passive: true });
+    updateHeaderState();
 
-    const mobileMenu =
-      document.getElementById("mobileMenu");
+    /* =========================
+       MOBILE MENU
+    ========================= */
+    function closeMobileMenu() {
+      mobileMenu.classList.remove("open");
+      menuButton.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("mobile-menu-open");
+    }
 
+    function toggleMobileMenu() {
+      const willOpen = !mobileMenu.classList.contains("open");
+      mobileMenu.classList.toggle("open", willOpen);
+      menuButton.classList.toggle("open", willOpen);
+      menuButton.setAttribute("aria-expanded", String(willOpen));
+      document.body.classList.toggle("mobile-menu-open", willOpen);
+    }
 
-    menuButton.addEventListener(
-      "click",
-      function () {
+    menuButton.addEventListener("click", toggleMobileMenu);
 
-        mobileMenu.classList.toggle("open");
+    mobileProductsButton.addEventListener("click", function () {
+      const willOpen = !mobileProducts.classList.contains("open");
+      mobileProducts.classList.toggle("open", willOpen);
+      mobileProductsButton.setAttribute("aria-expanded", String(willOpen));
+    });
 
+    /* =========================
+       DESKTOP MEGA MENU CLOSE
+       点击菜单里的内容后，即使鼠标还停留在菜单区域，也先强制收起。
+       鼠标离开菜单区域后，恢复下一次 Hover。
+    ========================= */
+    function closeDesktopMegaMenu() {
+      desktopProductsMenu.classList.add("menu-suppressed");
+      if (document.activeElement && typeof document.activeElement.blur === "function") {
+        document.activeElement.blur();
       }
-    );
+    }
 
+    desktopProductsMenu.addEventListener("mouseleave", function () {
+      desktopProductsMenu.classList.remove("menu-suppressed");
+    });
 
-    mobileMenu
-      .querySelectorAll("a")
-      .forEach(function(link) {
+    /* =========================
+       PRECISE SCROLL
+       不直接依赖浏览器锚点，自动扣除固定导航栏高度。
+    ========================= */
+    function scrollToTarget(target) {
+      if (!target) return;
 
-        link.addEventListener(
-          "click",
-          function () {
+      const headerHeight = header.offsetHeight;
+      const extraGap = window.innerWidth <= 850 ? 14 : 20;
+      const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - extraGap;
 
-            mobileMenu.classList.remove("open");
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: "smooth"
+      });
+    }
 
-          }
-        );
+    function closeAllNavigation() {
+      closeMobileMenu();
+      closeDesktopMegaMenu();
+    }
 
+    /* =========================
+       PRODUCT FILTER
+    ========================= */
+    const productFilterButtons = Array.from(document.querySelectorAll(".product-filter"));
+    const productCards = Array.from(document.querySelectorAll(".product-card"));
+
+    function applyProductFilter(filter) {
+      productFilterButtons.forEach(function (button) {
+        const active = button.dataset.filter === filter;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
       });
 
-    /* 手机产品分类展开 */
+      productCards.forEach(function (card) {
+        const shouldShow = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("is-hidden", !shouldShow);
+      });
+    }
 
-const mobileProducts =
-  document.querySelector(".mobile-products");
+    productFilterButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        applyProductFilter(button.dataset.filter);
+      });
+    });
 
+    /* =========================
+       ACCESSORY FILTER
+    ========================= */
+    const accessoryFilterButtons = Array.from(document.querySelectorAll(".accessory-filter"));
+    const accessoryPanels = Array.from(document.querySelectorAll(".accessory-panel"));
 
-const mobileProductsButton =
-  document.getElementById("mobileProductsButton");
+    function applyAccessoryFilter(filter) {
+      accessoryFilterButtons.forEach(function (button) {
+        const active = button.dataset.accessoryFilter === filter;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
 
+      accessoryPanels.forEach(function (panel) {
+        const shouldShow = filter === "all" || panel.dataset.accessoryCategory === filter;
+        panel.classList.toggle("is-hidden", !shouldShow);
+      });
+    }
 
-mobileProductsButton.addEventListener(
-  "click",
-  function () {
+    accessoryFilterButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        applyAccessoryFilter(button.dataset.accessoryFilter);
+      });
+    });
 
-    mobileProducts.classList.toggle("open");
+    /* =========================
+       NAVIGATION ACTIONS
+    ========================= */
 
-  }
-);
+    // 点击某个具体产品：自动筛选正确大类 -> 收起导航 -> 精准定位产品卡片。
+    document.querySelectorAll("[data-product-target]").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    /* 第二段视频：
-       滑到页面后自动播放
-       离开页面后自动暂停 */
+        const filter = link.dataset.filter;
+        const targetId = link.dataset.productTarget;
+        const target = document.getElementById(targetId);
 
-    const featureVideo =
-      document.getElementById("featureVideo");
+        applyProductFilter(filter);
+        closeAllNavigation();
 
+        // 等待 display 状态和 Flex 布局更新后再计算位置。
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            scrollToTarget(target);
 
-    const observer =
-      new IntersectionObserver(
-
-        function(entries) {
-
-          entries.forEach(
-            function(entry) {
-
-              if (
-                entry.isIntersecting &&
-                entry.intersectionRatio >= 0.25
-              ) {
-
-                featureVideo
-                  .play()
-                  .catch(function(){});
-
-              } else {
-
-                featureVideo.pause();
-
-              }
-
+            if (target) {
+              target.classList.add("focus-card");
+              window.setTimeout(function () {
+                target.classList.remove("focus-card");
+              }, 1400);
             }
-          );
+          });
+        });
+      });
+    });
 
+    // 点击产品大类：自动筛选该类全部产品，然后定位产品区。
+    document.querySelectorAll("[data-filter-link]").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const filter = link.dataset.filterLink || "all";
+        applyProductFilter(filter);
+        closeAllNavigation();
+
+        requestAnimationFrame(function () {
+          scrollToTarget(document.getElementById("products"));
+        });
+      });
+    });
+
+    // 普通页面导航：统一使用带 Header 偏移的精准滚动。
+    document.querySelectorAll("[data-scroll-target]").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const targetId = link.dataset.scrollTarget;
+        const target = document.getElementById(targetId);
+
+        closeAllNavigation();
+
+        requestAnimationFrame(function () {
+          scrollToTarget(target);
+        });
+      });
+    });
+
+    /* ESC 关闭手机菜单 */
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closeMobileMenu();
+        closeDesktopMegaMenu();
+      }
+    });
+
+    /* =========================
+       FEATURE VIDEO
+       滚到可见区域自动播放；离开后暂停。
+    ========================= */
+    const featureVideo = document.getElementById("featureVideo");
+
+    if (featureVideo && "IntersectionObserver" in window) {
+      const featureObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && entry.intersectionRatio >= .22) {
+              featureVideo.play().catch(function () {});
+            } else {
+              featureVideo.pause();
+            }
+          });
         },
-
         {
-          threshold: [0, 0.25, 0.5]
+          threshold: [0, .22, .5]
         }
-
       );
 
+      featureObserver.observe(featureVideo);
+    }
 
-    observer.observe(featureVideo);
-
-  /* =========================
-   产品分类筛选
-========================= */
-
-const productFilterButtons =
-  document.querySelectorAll(".product-filter");
-
-const productCards =
-  document.querySelectorAll(".product-card");
-
-
-productFilterButtons.forEach(
-  function(button) {
-
-    button.addEventListener(
-      "click",
-      function() {
-
-        const filter =
-          button.dataset.filter;
-
-
-        productFilterButtons.forEach(
-          function(item) {
-
-            item.classList.remove("active");
-
-          }
-        );
-
-
-        button.classList.add("active");
-
-
-        productCards.forEach(
-          function(card) {
-
-            const category =
-              card.dataset.category;
-
-
-            if (
-              filter === "all" ||
-              category === filter
-            ) {
-
-              card.classList.remove("is-hidden");
-
-            } else {
-
-              card.classList.add("is-hidden");
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-  }
-);  
-
+    /* 首屏视频自动播放失败时，保留 Poster，不出现黑屏 */
+    const heroVideo = document.getElementById("heroVideo");
+    if (heroVideo) {
+      heroVideo.play().catch(function () {});
+    }
   </script>
 
 </body>
